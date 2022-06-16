@@ -1,0 +1,5 @@
+AddDefaultCharset UTF-8
+
+RewriteEngine on
+RewriteRule main index.php [L]
+RewriteRule product product.php [L]

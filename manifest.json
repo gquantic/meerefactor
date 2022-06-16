@@ -1,0 +1,22 @@
+{
+    "name": "Партнёрская программа | MeeMoney",
+    "short_name": "MeeMoney",
+    "description": "Партнерская программа без лишней бюрократии.",
+    "icons": [
+        {
+            "src": "/favicon.png",
+            "sizes": "32x32",
+            "type": "image/png"
+        },
+        
+        {
+            "src": "/favicon.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ],
+    "start_url": "/login.php",
+    "display": "fullscreen",
+    "theme_color": "#fa6801",
+    "background_color": "#fa6801"
+}
