@@ -1,43 +1,44 @@
-<?
-	/*
-	*** Главный файл, отвечающий за корень сайта веб-мастера
-	*/
+<?php
 
-	//Подключение всех библиотек 
-	require_once "../libs/db.php";
-	$_Db = new Db(1, 1);
-	$db = $_Db;
+/*
+*** Главный файл, отвечающий за корень сайта веб-мастера
+*/
 
-	session_start();
+require_once $_SERVER['DOCUMENT_ROOT'] . '/vendor/autoload.php';
 
-	$userData = $_Db->userSelect();
+use Libs\Controllers\Db;
+use Libs\Controllers\Site;
 
-	// Извлекаем всех офферов по категориям
-	#$offers = $_Db->query("SELECT * FROM `offers` WHERE `modercheck`='1' LIMIT 8");
+Site::startSession();
 
-	$debcard = $_Db->query("SELECT * FROM `offers` WHERE `modercheck`='1' AND `top`=1 AND `web_show`='1' AND `category` IN ('debetcard') LIMIT 8");
-	$credcard = $_Db->query("SELECT * FROM `offers` WHERE `modercheck`='1' AND `top`=1 AND `web_show`='1' AND `category` IN ('creditcard') LIMIT 8");
+require_once $_SERVER['DOCUMENT_ROOT'] . '/vendor/autoload.php';
 
-	$games = $_Db->query("SELECT * FROM `offers` WHERE `modercheck`='1' AND `top`=1 AND `web_show`='1' AND `category` LIKE ('game%%') LIMIT 8");
+ini_set('error_reporting', E_ALL);
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
 
-	$job = $_Db->query("SELECT * FROM `offers` WHERE `modercheck`='1' AND `top`=1 AND `web_show`='1' AND `category` LIKE ('job%%') LIMIT 8");
-	
-	$loan = $_Db->query("SELECT * FROM `offers` WHERE `modercheck`='1' AND `top`=1 AND `web_show`='1' AND `category` LIKE ('%%loan%%') LIMIT 8");
+$uri = substr($_SERVER['REQUEST_URI'], 11);
+$getVariables = strpos($uri, '?');
 
-	if(!isset($_SESSION['type'])) header("Location: /");
-	else if($_SESSION['type'] != 'webmaster') header("Location: /advertiser/");
+$userData = Db::userSelect();
 
-	require_once "../libs/site.php";
-	$_Site = new Site();
+if ($getVariables !== false) {
+    $uri = substr($uri, 0, $getVariables);
+}
 
-	// Получаем данные о запрашиваемой странице
-	$pageName = "Главная";
-    
-    // Подключение шапки
-	include "assets/layout/blocks/header.php";
+if(!isset($_SESSION['type'])) header("Location: /");
+else if($_SESSION['type'] != 'webmaster') header("Location: /");
 
-	// Прорисовка сайта
-	include "assets/layout/bodys/index.php";
+// Если есть обработчик, то подключаем
+if (file_exists("assets/layout/controllers/{$uri}.php")) {
+    include "assets/layout/controllers/{$uri}.php";
+}
 
-    // Подключение подвала
-	include "assets/layout/blocks/footer.php";
+// Подключение шапки
+include "assets/layout/blocks/header.php";
+
+// Прорисовка сайта
+include "assets/layout/bodys/{$uri}.php";
+
+// Подключение подвала
+include "assets/layout/blocks/footer.php";

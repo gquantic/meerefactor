@@ -4,7 +4,9 @@
 	*/
 
 	//Подключение всех библиотек 
-	require_once "../libs/db.php";
+use Libs\Controllers\Site;
+
+require_once "/libs/coDb.phpers/Db.php";
 	$_Db = new Db(1, 1);
 
 	//Подключаем графики 
@@ -18,7 +20,7 @@
 	$userData = $_Db->userSelect();
 	$faq = mysqli_fetch_assoc($_Db->query("SELECT * FROM `faq` WHERE `id`='".intval($_GET['id'])."'"));
 
-	require_once "../libs/site.php";
+	require_once "../Libs/site.php";
 	$_Site = new Site();
 
 	// Получаем данные о запрашиваемой странице

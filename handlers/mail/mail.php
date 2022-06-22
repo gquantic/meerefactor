@@ -1,5 +1,5 @@
 <?php
-    include '../../libs/db.php';
+    include '/libs/contrDb.php/Db.php';
     $db = new Db(0,0);
     
     $headers  = 'MIME-Version: 1.0' . "\r\n";

@@ -175,10 +175,10 @@
                                             </tfoot>
                                             <tbody>
                                                 <?while($conversion = mysqli_fetch_assoc($conversions)):
-                                                  $meeOffer = mysqli_fetch_assoc($_Db->query("SELECT * FROM `offers` WHERE `id`='".$conversion['offer_id']."'"));
+                                                  $meeOffer = mysqli_fetch_assoc(\Libs\Controllers\Db::query("SELECT * FROM `offers` WHERE `id`='".$conversion['offer_id']."'"));
                                                 ?>
                                                 <tr>
-                                                    <td><a <?if($meeOffer['name'] != ''){?>href="viewoffer.php?id=<?echo $conversion['offer_id'];?>"<?}?>>
+                                                    <td><a <?if($meeOffer['name'] != ''){?>href="viewoffer?id=<?echo $conversion['offer_id'];?>"<?}?>>
                                                         <?if($meeOffer['name'] != ''){?>
                                                             <?=$meeOffer['name'];?>
                                                         <?}else{?>
@@ -221,11 +221,11 @@
                                             <tbody>
                                                 <?for($i = 0; $i <= count($refСonvs); $i++){
                                                   if($refСonvs[$i] != ''){
-                                                    $meeOffer = mysqli_fetch_assoc($_Db->query("SELECT * FROM `offers` WHERE `id`='".$refСonvs[$i]['offer_id']."'"));
-                                                    $convRef = mysqli_fetch_assoc($_Db->query("SELECT * FROM `users` WHERE `id`='".$refСonvs[$i]['webmaster_id']."'"));
+                                                    $meeOffer = mysqli_fetch_assoc(\Libs\Controllers\Db::query("SELECT * FROM `offers` WHERE `id`='".$refСonvs[$i]['offer_id']."'"));
+                                                    $convRef = mysqli_fetch_assoc(\Libs\Controllers\Db::query("SELECT * FROM `users` WHERE `id`='".$refСonvs[$i]['webmaster_id']."'"));
                                                     ?>
                                                 <tr>
-                                                    <td><a href="viewoffer.php?id=<?echo $refСonvs[$i]['offer_id'];?>">
+                                                    <td><a href="viewoffer?id=<?echo $refСonvs[$i]['offer_id'];?>">
                                                         <?if($meeOffer['name'] != ''){?>
                                                             <?=$meeOffer['name'];?>
                                                         <?}else{?>

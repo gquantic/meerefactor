@@ -1,4 +1,8 @@
-<?
+<?php
+
+use Libs\Controllers\Db;
+use Libs\Controllers\Site;
+
 $errors = array();
 
 if(isset($_POST['auth'])){
@@ -6,15 +10,17 @@ if(isset($_POST['auth'])){
     $password = $_POST['password'];
 
     if($email != '' && $password != ''){
-        $user = $_Db->query("SELECT * FROM `users` WHERE `email`='$email'");
-        
-        
+        $user = Db::query("SELECT * FROM `users` WHERE `email`='$email'");
 
-        if(mysqli_num_rows($user) > 0){
+        if (mysqli_num_rows($user) > 0) {
             $user = mysqli_fetch_assoc($user);
 
+
+
             if(md5($password) == $user['password']){
-                $code = $_Db->generate("int", 16);
+                Site::startSession();
+
+                $code = Db::generate("int", 16);
 
                 $_SESSION['auth'] = true;
                 $_SESSION['email'] = $email;
@@ -22,14 +28,14 @@ if(isset($_POST['auth'])){
                 setcookie("utoken", $code, time()+99000);
                 setcookie("uid", $user['id'], time()+99000);
 
-                $_Db->query("UPDATE `users` SET `token`='$code' WHERE `email`='$email' ");
+                Db::query("UPDATE `users` SET `token`='$code' WHERE `email`='$email' ");
 
                 #if($_POST['rememberme'] == 'rememberme') setcookie("authEmail", $email, time()+999999);
 
-                if($user['type'] == 'advertiser'){
+                if ($user['type'] == 'advertiser') {
                     $_SESSION['type'] = 'advertiser';
                     header("Location: /advertiser/");
-                }else{
+                } else {
                     $_SESSION['type'] = 'webmaster';
                     header("Location: /webmaster/");
                 }

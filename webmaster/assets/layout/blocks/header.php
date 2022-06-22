@@ -1,5 +1,5 @@
 <?php
-$notifs = $db->query("SELECT * FROM `notifications` WHERE `foruser`='".$userData['id']."' AND `view`='0'");
+$notifs = \Libs\Controllers\Db::query("SELECT * FROM `notifications` WHERE `foruser`='".$userData['id']."' AND `view`='0'");
 #var_dump($notifs);
 ?>
 <!doctype html>
@@ -131,31 +131,31 @@ $notifs = $db->query("SELECT * FROM `notifications` WHERE `foruser`='".$userData
                             </a>
                         </li>
                         <li>
-                            <a href="profile.php">
+                            <a href="profile">
                                 <div class="icon-circle mb-2 bg-blue"><i class="zmdi zmdi-account"></i></div>
                                 <p class="mb-0">Мой профиль</p>
                             </a>
                         </li>
                         <li>
-                            <a href="offers.php">
+                            <a href="offers">
                                 <div class="icon-circle mb-2 bg-amber"><i class="zmdi zmdi-shopping-cart"></i></div>
                                 <p class="mb-0">Офферы</p>
                             </a>
                         </li>
                         <li>
-                            <a href="referals.php">
+                            <a href="referals">
                                 <div class="icon-circle mb-2 bg-green"><i class="zmdi zmdi-accounts"></i></div>
                                 <p class="mb-0">Рефералы</p>
                             </a>
                         </li>
                         <li>
-                            <a href="wallet.php">
+                            <a href="wallet">
                                 <div class="icon-circle mb-2 bg-purple"><i class="zmdi zmdi-balance-wallet"></i></div>
                                 <p class="mb-0">Финансы</p>
                             </a>
                         </li>
                         <li>
-                            <a href="stats.php">
+                            <a href="stats">
                                 <div class="icon-circle mb-2 bg-red"><i class="zmdi zmdi-view-dashboard"></i></div>
                                 <p class="mb-0">Статистика</p>
                             </a>
@@ -252,7 +252,7 @@ $notifs = $db->query("SELECT * FROM `notifications` WHERE `foruser`='".$userData
             <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button"><i class="zmdi zmdi-balance-wallet"></i>
             </a>
             <ul class="dropdown-menu slideUp2" style="height: 200px !important;">
-                <li class="header">Ваш баланс <small class="float-right"><a href="wallet.php">Подробнее</a></small></li>
+                <li class="header">Ваш баланс <small class="float-right"><a href="wallet">Подробнее</a></small></li>
                 <li class="body">
                     <ul class="menu tasks list-unstyled">
                         <li>
@@ -282,7 +282,7 @@ $notifs = $db->query("SELECT * FROM `notifications` WHERE `foruser`='".$userData
         <!--li><a href="javascript:void(0);" class="app_google_drive" title="Google Drive"><i class="zmdi zmdi-google-drive"></i></a></li-->
         <!--li><a href="javascript:void(0);" class="app_group_work" title="Group Work"><i class="zmdi zmdi-group-work"></i></a></li-->
         <li><a href="javascript:void(0);" class="js-right-sidebar" title="Setting"><i class="zmdi zmdi-settings zmdi-hc-spin"></i></a></li>
-        <li><a href="/exit.php" class="mega-menu" title="Sign Out"><i class="zmdi zmdi-power"></i></a></li>
+        <li><a href="/exit" class="mega-menu" title="Sign Out"><i class="zmdi zmdi-power"></i></a></li>
     </ul>
 </div>
 
@@ -290,64 +290,38 @@ $notifs = $db->query("SELECT * FROM `notifications` WHERE `foruser`='".$userData
 <aside id="leftsidebar" class="sidebar">
     <div class="navbar-brand">
         <button class="btn-menu ls-toggle-btn" type="button"><i class="zmdi zmdi-menu"></i></button>
-        <a href="index.php"><img width="150px" src="/assets/img/logo.png" width="25" alt="MeeMoney"><!--span class="m-l-10">Aero</span--></a>
+        <a href="index"><img width="150px" src="/assets/img/logo.png" width="25" alt="MeeMoney"><!--span class="m-l-10">Aero</span--></a>
     </div>
     <div class="menu">
         <ul class="list">
             <li>
                 <div class="user-info">
-                    <a class="image" href="profile.php"><img src="assets/images/profile_av.jpg" alt="User"></a>
+                    <a class="image" href="profile"><img src="assets/images/profile_av.jpg" alt="User"></a>
                     <div class="detail">
                         <h4><?if(strlen($userData['name']) > 8) echo substr($userData['name'], 0, 8).'...'; else echo $userData['name'];?></h4>
                         <small>Веб-мастер</small>                        
                     </div>
                 </div>
             </li>
-            <li class=""><a href="index.php"><i class="zmdi zmdi-home"></i><span>Главная</span></a></li>
+            <li class=""><a href="index"><i class="zmdi zmdi-home"></i><span>Главная</span></a></li>
             
             <li><a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-shopping-cart"></i><span>Офферы</span></a>
                 <ul class="ml-menu">
-                    <li><a href="offers.php">Все офферы</a></li>
+                    <li><a href="offers">Все офферы</a></li>
                 </ul>
             </li>
 
-            <li class=""><a href="stats.php"><i class="zmdi zmdi-view-dashboard"></i><span>Статистика</span></a></li>
+            <li class=""><a href="stats"><i class="zmdi zmdi-view-dashboard"></i><span>Статистика</span></a></li>
 
-            <li><a href="profile.php"><i class="zmdi zmdi-account"></i><span>Мой профиль</span></a></li>
+            <li><a href="profile"><i class="zmdi zmdi-account"></i><span>Мой профиль</span></a></li>
 
-            <li><a href="referals.php"><i class="zmdi zmdi-accounts"></i><span>Рефералы</span></a></li>
+            <li><a href="referals"><i class="zmdi zmdi-accounts"></i><span>Рефералы</span></a></li>
 
-            <li><a href="wallet.php"><i class="zmdi zmdi-balance-wallet"></i><span>Финансы</span></a></li>
+            <li><a href="wallet"><i class="zmdi zmdi-balance-wallet"></i><span>Финансы</span></a></li>
 
-            <li><a href="faq.php"><i class="zmdi zmdi-book"></i><span>Полезная информация</span></a></li>
-
-            <!--li><a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-apps"></i><span>Сервисы</span></a>
-                <ul class="ml-menu">
-                    <li><a href="mail-inbox.php">Почта / Рассылка</a></li>
-                    <li><a href="urls.php">Ссылки</a></li>                    
-                </ul>
-            </li-->
+            <li><a href="faq"><i class="zmdi zmdi-book"></i><span>Полезная информация</span></a></li>
             
-            <li><a href="/exit.php"><i class="zmdi zmdi-minus-circle"></i><span>Выход</span></a></li><br>
-
-            <!--li>
-                <div class="progress-container progress-primary m-t-10">
-                    <span class="progress-badge">CTR</span>
-                    <div class="progress">
-                        <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="67" aria-valuemin="0" aria-valuemax="100" style="width: 67%;">
-                            <span class="progress-value">67%</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="progress-container progress-info">
-                    <span class="progress-badge">Принято лидов</span>
-                    <div class="progress">
-                        <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="73" aria-valuemin="0" aria-valuemax="100" style="width: 73%;">
-                            <span class="progress-value">73%</span>
-                        </div>
-                    </div>
-                </div>
-            </li-->
+            <li><a href="/exit"><i class="zmdi zmdi-minus-circle"></i><span>Выход</span></a></li><br>
         </ul>
     </div>
 </aside>
@@ -414,66 +388,7 @@ $notifs = $db->query("SELECT * FROM `notifications` WHERE `foruser`='".$userData
             <div class="slim_scroll">
                 <div class="card">
                     <ul class="list-unstyled">
-                        <!--li class="online">
-                            <a href="javascript:void(0);">
-                                <div class="media">
-                                    <img class="media-object " src="assets/images/xs/avatar4.jpg" alt="">
-                                    <div class="media-body">
-                                        <span class="name">Sophia <small class="float-right">11:00AM</small></span>
-                                        <span class="message">There are many variations of passages of Lorem Ipsum available</span>
-                                        <span class="badge badge-outline status"></span>
-                                    </div>
-                                </div>
-                            </a>                            
-                        </li>
-                        <li class="online">
-                            <a href="javascript:void(0);">
-                                <div class="media">
-                                    <img class="media-object " src="assets/images/xs/avatar5.jpg" alt="">
-                                    <div class="media-body">
-                                        <span class="name">Grayson <small class="float-right">11:30AM</small></span>
-                                        <span class="message">All the Lorem Ipsum generators on the</span>
-                                        <span class="badge badge-outline status"></span>
-                                    </div>
-                                </div>
-                            </a>                            
-                        </li>
-                        <li class="offline">
-                            <a href="javascript:void(0);">
-                                <div class="media">
-                                    <img class="media-object " src="assets/images/xs/avatar2.jpg" alt="">
-                                    <div class="media-body">
-                                        <span class="name">Isabella <small class="float-right">11:31AM</small></span>
-                                        <span class="message">Contrary to popular belief, Lorem Ipsum</span>
-                                        <span class="badge badge-outline status"></span>
-                                    </div>
-                                </div>
-                            </a>                            
-                        </li>
-                        <li class="me">
-                            <a href="javascript:void(0);">
-                                <div class="media">
-                                    <img class="media-object " src="assets/images/xs/avatar1.jpg" alt="">
-                                    <div class="media-body">
-                                        <span class="name">John <small class="float-right">05:00PM</small></span>
-                                        <span class="message">It is a long established fact that a reader</span>
-                                        <span class="badge badge-outline status"></span>
-                                    </div>
-                                </div>
-                            </a>                            
-                        </li>
-                        <li class="online">
-                            <a href="javascript:void(0);">
-                                <div class="media">
-                                    <img class="media-object " src="assets/images/xs/avatar3.jpg" alt="">
-                                    <div class="media-body">
-                                        <span class="name">Alexander <small class="float-right">06:08PM</small></span>
-                                        <span class="message">Richard McClintock, a Latin professor</span>
-                                        <span class="badge badge-outline status"></span>
-                                    </div>
-                                </div>
-                            </a>                            
-                        </li-->                        
+
                     </ul>
                 </div>
             </div>

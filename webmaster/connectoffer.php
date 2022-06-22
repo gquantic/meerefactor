@@ -4,26 +4,28 @@
 	*/
 
 	//Подключение всех библиотек 
-	require_once "../libs/db.php";
+use Libs\Controllers\Site;
+
+require_once "/libs/coDb.phpers/Db.php";
 	$_Db = new Db(1, 1);
 	$db = $_Db;
 
 	session_start();
 
-	$userData = $_Db->userSelect();
+	$userData = \Libs\Controllers\Db::userSelect();
 	$offerid = intval($_GET['id']);
 
 	$uid = $userData['id'];
 
-	$templates = $_Db->query("SELECT * FROM `templates` WHERE `web_id`='$uid' AND `moder_check`='1' LIMIT 30");
+	$templates = \Libs\Controllers\Db::query("SELECT * FROM `templates` WHERE `web_id`='$uid' AND `moder_check`='1' LIMIT 30");
 
-	$offers = $_Db->query("SELECT * FROM `offers` WHERE `modercheck`='1'");
-	$offer = $_Db->query("SELECT * FROM `offers` WHERE `id`='$offerid'");
+	$offers = \Libs\Controllers\Db::query("SELECT * FROM `offers` WHERE `modercheck`='1'");
+	$offer = \Libs\Controllers\Db::query("SELECT * FROM `offers` WHERE `id`='$offerid'");
 	$offer = mysqli_fetch_assoc($offer);
 
 	if($_SESSION['type'] != 'webmaster') header("Location: /advertiser/");
 
-	require_once "../libs/site.php";
+	require_once "../Libs/site.php";
 	$_Site = new Site();
 
 	// Получаем данные о запрашиваемой странице

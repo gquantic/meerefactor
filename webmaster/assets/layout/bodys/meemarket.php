@@ -126,7 +126,7 @@
         
         <div class="row clearfix">
             <?php 
-                $items = $db->query("SELECT * FROM `meeshop` WHERE `active`='1' AND `category` LIKE '%%".$_GET['cat']."%%'");
+                $items = \Libs\Controllers\Db::query("SELECT * FROM `meeshop` WHERE `active`='1' AND `category` LIKE '%%".$_GET['cat']."%%'");
                 while($item = mysqli_fetch_assoc($items)){?>
                     <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6">
                         <a href="/webmaster/product.php?id=<?php echo $item['id']; ?>" class="productblock">

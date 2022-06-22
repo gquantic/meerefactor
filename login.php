@@ -3,17 +3,18 @@
 	*** Главный файл, отвечающий за корень сайта
 	*/
 
-	//Подключение всех библиотек 
-	require_once "libs/db.php";
-	$_Db = new Db('NaN', 0);
+include $_SERVER['DOCUMENT_ROOT'] . '/vendor/autoload.php';
 
-	$_Db->authCheck();
+ini_set('error_reporting', E_ALL);
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
 
-	require_once "libs/site.php";
-	$_Site = new Site();
+//Подключение всех библиотек
+use Libs\Controllers\Db;
+use Libs\Controllers\Site;
 
-	// Получаем данные о запрашиваемой странице
-	$name = $_Site->pageName();
+// Получаем данные о запрашиваемой странице
+$name = Site::pageName();
 
-	// Прорисовка сайта
-	include "assets/layout/bodys/login.php";
+// Прорисовка сайта
+include "assets/layout/bodys/login.php";

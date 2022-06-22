@@ -4,7 +4,7 @@
 	*/
 
 	//Подключение всех библиотек
-	require_once "libs/db.php";
+	require_once "/libsDb.phpollers/Db.php";
 	$db = new Db('NaN', 0);
 
 	$id = intval($_GET['id']);

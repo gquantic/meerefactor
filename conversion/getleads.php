@@ -8,10 +8,10 @@ ini_set('error_reporting', E_ALL);
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 
-include '../libs/db.php';
+include '/libs/coDb.phpers/Db.php';
 $db = new Db(0,0);
 
-include '../libs/user.php';
+include '../Libs/user.php';
 $_User = new User;
 
 if ($_GET['password'] != "26052003arturmeemoney") {

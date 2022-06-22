@@ -4,17 +4,19 @@
 	*/
 
 	//Подключение всех библиотек 
-	require_once "../libs/db.php";
+use Libs\Controllers\Site;
+
+require_once "/libs/coDb.phpers/Db.php";
 	$_Db = new Db(1, 1);
 	$db = $_Db;
 
 	session_start();
 
-	$userData = $_Db->userSelect();
+	$userData = \Libs\Controllers\Db::userSelect();
 
 	if($_SESSION['type'] != 'webmaster') header("Location: /webmaster/");
 
-	require_once "../libs/site.php";
+	require_once "../Libs/site.php";
 	$_Site = new Site();
 
 	// Получаем данные о запрашиваемой странице

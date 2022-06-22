@@ -4,7 +4,9 @@
 	*/
 
 	//Подключение всех библиотек 
-	require_once "../libs/db.php";
+use Libs\Controllers\Site;
+
+require_once "/libs/coDb.phpers/Db.php";
 	$_Db = new Db(1, 1);
 	$db = $_Db;
 
@@ -12,13 +14,13 @@
 
 	$id = intval($_GET['id']);
 
-	$userData = $_Db->userSelect();
-	$offer = $_Db->query("SELECT * FROM `offers` WHERE `id`='$id'");
+	$userData = \Libs\Controllers\Db::userSelect();
+	$offer = \Libs\Controllers\Db::query("SELECT * FROM `offers` WHERE `id`='$id'");
 	$offer = mysqli_fetch_assoc($offer);
 
 	if($_SESSION['type'] != 'webmaster') header("Location: /advertiser/");
 
-	require_once "../libs/site.php";
+	require_once "../Libs/site.php";
 	$_Site = new Site();
 
 	// Получаем данные о запрашиваемой странице

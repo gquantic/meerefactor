@@ -22,7 +22,7 @@
                 <div class="card widget_2 traffic">
                     <div class="body">
                         <h6>Привлечено рефералов</h6>
-                        <h2 style="color:#fa6801;"><?echo mysqli_num_rows($_Db->query("SELECT * FROM `users` WHERE `referal`='$userId'"));?></h2>
+                        <h2 style="color:#fa6801;"><?echo mysqli_num_rows(\Libs\Controllers\Db::query("SELECT * FROM `users` WHERE `referal`='$userId'"));?></h2>
                     </div>
                 </div>
             </div>
@@ -126,7 +126,7 @@
                                             </thead>
                                             <tbody>
                                                 <?while($referal = mysqli_fetch_assoc($referals)):
-                                                    $sum = mysqli_fetch_assoc($db->query("SELECT SUM(`price`) FROM `conversions` WHERE `webmaster_id`='".$referal['id']."'"));
+                                                    $sum = mysqli_fetch_assoc(\Libs\Controllers\Db::query("SELECT SUM(`price`) FROM `conversions` WHERE `webmaster_id`='".$referal['id']."'"));
                                                  ?>
                                                 <tr>
                                                     <td><?echo $referal['name']?></td>

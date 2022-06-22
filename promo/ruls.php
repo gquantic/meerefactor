@@ -1,5 +1,5 @@
 <?php 
-include '../libs/db.php';
+include '/libs/coDb.phpers/Db.php';
 $db = new Db('0', '0'); 
 
 session_start();

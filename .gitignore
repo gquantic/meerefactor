@@ -3,3 +3,4 @@ admin/assets/layout/blocks/assets/
 advertiser/
 promo/js/
 **/blocks/assets/
+/vendor/

@@ -82,7 +82,7 @@
             </div>
         </div>
         <div class="row clearfix">
-            <?php $db->exOffers($debcard); ?>         
+            <?php \Libs\Controllers\Db::exOffers($debcard); ?>
         </div>
         <?php endif; ?>
         
@@ -97,7 +97,7 @@
             </div>
         </div>
         <div class="row clearfix">
-            <?php $db->exOffers($credcard); ?>         
+            <?php \Libs\Controllers\Db::exOffers($credcard); ?>
         </div>
         <?php endif; ?>
 
@@ -113,27 +113,9 @@
         <div>
         
         <div class="row clearfix">
-            <?php $db->exOffers($games); ?>               
+            <?php \Libs\Controllers\Db::exOffers($games); ?>
         </div>
         <?php endif; ?>
-        
-        
-        <?php if(mysqli_num_rows($microloan) > 0): ?>
-        <div class="row clearfix">
-            <div class="col-lg-12">
-                <div class="card">
-                    <div class="header">
-                        <h2><strong><i class="zmdi zmdi-chart"></i> Топовые</strong> займовые Офферы</h2>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <div class="row clearfix">
-            <?php $db->exOffers($microloan); ?>               
-        </div>
-        <?php endif; ?>
-        
         
         <?php if(mysqli_num_rows($loan) > 0): ?>
         <div class="row clearfix">
@@ -147,7 +129,7 @@
         </div>
         
         <div class="row clearfix">
-            <?php $db->exOffers($loan); ?>               
+            <?php \Libs\Controllers\Db::exOffers($loan); ?>
         </div>
         <?php endif; ?>
         
@@ -163,7 +145,7 @@
             </div>
         </div>
         <div class="row clearfix">
-            <?php $db->exOffers($job); ?>           
+            <?php \Libs\Controllers\Db::exOffers($job); ?>
         </div>
         <?php endif; ?>
     </div>

@@ -4,7 +4,7 @@
 	*/
 
 	//Подключение всех библиотек 
-	require_once "../../libs/db.php";
+	require_once "/libs/contrDb.php/Db.php";
 	$db = new Db(1, 1);
 
 	session_start();
@@ -35,7 +35,7 @@
 
 			if(!empty($insert)){
 				$msg = "Заявка успешно отправлена!";
-				$to = "/webmaster/viewoffer.php?id=".$offerData['id'];
+				$to = "/webmaster/viewoffer?id=".$offerData['id'];
 
 				header("Location: /webmaster/displaymessage.php?act=success&msg=$msg&from=$to");
 			}

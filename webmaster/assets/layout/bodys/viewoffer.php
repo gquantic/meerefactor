@@ -88,8 +88,8 @@
                                         </div>      
                                     </div>
                                     <?else: 
-                                    $selectres = $db->query("SELECT * FROM `ofconnect` WHERE `webid`='".$userData['id']."' AND `offid`='".$_GET['id']."'");
-                                    if(mysqli_num_rows($selectres) > 0): $res = mysqli_fetch_assoc($selectres); $temp = $db->fQuery("SELECT * FROM `templates` WHERE `id`='".$res['tempid']."'");?>
+                                    $selectres = \Libs\Controllers\Db::query("SELECT * FROM `ofconnect` WHERE `webid`='".$userData['id']."' AND `offid`='".$_GET['id']."'");
+                                    if(mysqli_num_rows($selectres) > 0): $res = mysqli_fetch_assoc($selectres); $temp = \Libs\Controllers\Db::fQuery("SELECT * FROM `templates` WHERE `id`='".$res['tempid']."'");?>
                                     <div class="form-group">
                                         <label for="">Ссылка для привлечения:</label>
                                         <div class="row">
@@ -120,7 +120,7 @@
                                                         <!--<button class="btn btn-warning" style="width:100%;color:#fff !important;background: #ff6100;">Протестировать продукт</button>-->
                                                     <!--</a>-->
                                                     <select class="selecttemp" name="tempid">
-                                                        <?php   $templs = $db->query("SELECT * FROM `templates` WHERE `web_id`='".$userData['id']."'"); var_dump($templs);
+                                                        <?php   $templs = \Libs\Controllers\Db::query("SELECT * FROM `templates` WHERE `web_id`='".$userData['id']."'"); var_dump($templs);
                                                                 while($temp = mysqli_fetch_assoc($templs)): ?>
                                                             <option value="<?php echo $temp['id']; ?>"><?php echo $temp['name']; ?></option>
                                                         <?php endwhile; ?>

@@ -4,16 +4,16 @@
 	*/
 
 	//Подключение всех библиотек 
-	require_once "../../libs/db.php";
+	require_once "/libs/contrDb.php/Db.php";
 	$_Db = new Db(1, 1);
 	$db = $_Db;
 
 	session_start();
 
-	$userData = $_Db->userSelect();
+	$userData = \Libs\Controllers\Db::userSelect();
 
 	// Извлекаем всех офферов по категориям
-	#$offers = $_Db->query("SELECT * FROM `offers` WHERE `modercheck`='1' LIMIT 8");
+	#$offers = \Libs\Controllers\Db::query("SELECT * FROM `offers` WHERE `modercheck`='1' LIMIT 8");
 
 	if(!isset($_SESSION['type'])) header("Location: /");
 	else if($_SESSION['type'] != 'webmaster') header("Location: /advertiser/");

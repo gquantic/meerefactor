@@ -6,7 +6,7 @@ $d    = $_POST['d'];
 $m    = $_POST['m'];
 $y    = $_POST['y'];
 
-include '../libs/db.php';
+include '/libs/coDb.phpers/Db.php';
 $db = new Db('0', '0');
 
 echo mysqli_num_rows($db->exportWithDate($from, $dc, $d, $m, $y));

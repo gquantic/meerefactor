@@ -4,17 +4,19 @@
 	*/
 
 	//Подключение всех библиотек 
-	require_once "../libs/db.php";
+use Libs\Controllers\Site;
+
+require_once "/libs/coDb.phpers/Db.php";
 	$_Db = new Db(1, 1);
 	$db = $_Db;
 
 	//Подключаем графики 
-	require_once "../libs/api.php";
+	require_once "../Libs/api.php";
 	$leads = new Leads();
     
 	session_start();
 
-	$userData = $_Db->userSelect();
+	$userData = \Libs\Controllers\Db::userSelect();
 	
 	#$conversions = $leads->request("conversions", $userData['id']);
 	$userId = $userData['id'];
@@ -22,7 +24,7 @@
 
 	if($_SESSION['type'] != 'webmaster') header("Location: /advertiser/");
 
-	require_once "../libs/site.php";
+	require_once "../Libs/site.php";
 	$_Site = new Site();
 
 
@@ -33,15 +35,15 @@
 
 	$convCount = 10;
 
-	$conversions = $_Db->query("SELECT * FROM `conversions` WHERE `webmaster_id`='$userId' ORDER BY `id` DESC");
+	$conversions = \Libs\Controllers\Db::query("SELECT * FROM `conversions` WHERE `webmaster_id`='$userId' ORDER BY `id` DESC");
 
 
-	$referals = $_Db->query("SELECT * FROM `users` WHERE `referal`='$userId'");
+	$referals = \Libs\Controllers\Db::query("SELECT * FROM `users` WHERE `referal`='$userId'");
     
     // Достаём реферальные конверсии
     $refСonvs = array();
     while ($referal = mysqli_fetch_assoc($referals)) {
-    	$conversion = mysqli_fetch_assoc($_Db->query("SELECT * FROM `conversions` WHERE `webmaster_id`='".$referal['id']."'"));
+    	$conversion = mysqli_fetch_assoc(\Libs\Controllers\Db::query("SELECT * FROM `conversions` WHERE `webmaster_id`='".$referal['id']."'"));
     	array_push($refСonvs, $conversion);
     }
 

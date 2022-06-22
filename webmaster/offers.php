@@ -4,28 +4,30 @@
 	*/
 
 	//Подключение всех библиотек 
-	require_once "../libs/db.php";
+use Libs\Controllers\Site;
+
+require_once "/libs/coDb.phpers/Db.php";
 	$_Db = new Db(1, 1);
 	$db = $_Db;
 
 	session_start();
 
-	mysqli_set_charset($_Db->connect(), "utf8");
+	mysqli_set_charset(\Libs\Controllers\Db::connect(), "utf8");
 
-	$userData = $_Db->userSelect();
+	$userData = \Libs\Controllers\Db::userSelect();
 
 
 
 
 
 	// Извлекаем всех офферов по категориям
-	$uoffers = $_Db->query("SELECT * FROM `offers` WHERE `modercheck`='1'");
+	$uoffers = \Libs\Controllers\Db::query("SELECT * FROM `offers` WHERE `modercheck`='1'");
 
 
 
 	if($_SESSION['type'] != 'webmaster') header("Location: /advertiser/");
 
-	require_once "../libs/site.php";
+	require_once "../Libs/site.php";
 	$_Site = new Site();
 
 	// Получаем данные о запрашиваемой странице

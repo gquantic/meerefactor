@@ -1,5 +1,5 @@
 <?php 
-include '../libs/db.php';
+include '/libs/coDb.phpers/Db.php';
 $db = new Db('0', '0'); 
 
 session_start();
@@ -179,7 +179,7 @@ $joboffer = mysqli_fetch_assoc($db->query("SELECT * FROM `offers` WHERE `id`='95
 												<div class="growth" style="color:#ffba00;"><?php echo $finoffer['leadPrice']*2; ?><img src="img/logo.png" width="20px" style="margin-bottom:-2px;margin-left:5px;"></div>
 											</div>
 										</div>
-										<a href="/webmaster/viewoffer.php?id=<?php echo $finoffer['id']; ?>" target="__blank" class="btn btn--large btn--dark-lighter btn--transparent full-width">Перейти к офферу</a>
+										<a href="/webmaster/viewoffer?id=<?php echo $finoffer['id']; ?>" target="__blank" class="btn btn--large btn--dark-lighter btn--transparent full-width">Перейти к офферу</a>
 									</div>
 								</div>
 								<div class="swiper-slide">
@@ -202,7 +202,7 @@ $joboffer = mysqli_fetch_assoc($db->query("SELECT * FROM `offers` WHERE `id`='95
 												<div class="growth" style="color:#ffba00;"><?php echo $gameoffer['leadPrice']*2; ?><img src="img/logo.png" width="20px" style="margin-bottom:-2px;margin-left:5px;"></div>
 											</div>
 										</div>
-										<a href="/webmaster/viewoffer.php?id=<?php echo $gameoffer['id']; ?>" target="__blank" class="btn btn--large btn--dark-lighter btn--transparent full-width">Перейти к офферу</a>
+										<a href="/webmaster/viewoffer?id=<?php echo $gameoffer['id']; ?>" target="__blank" class="btn btn--large btn--dark-lighter btn--transparent full-width">Перейти к офферу</a>
 									</div>
 								</div><div class="swiper-slide">
 									<div class="crumina-module crumina-pricing-table pricing-table--small">
@@ -224,7 +224,7 @@ $joboffer = mysqli_fetch_assoc($db->query("SELECT * FROM `offers` WHERE `id`='95
 												<div class="growth" style="color:#ffba00;"><?php echo $joboffer['leadPrice']*2; ?><img src="img/logo.png" width="20px" style="margin-bottom:-2px;margin-left:5px;"></div>
 											</div>
 										</div>
-										<a href="/webmaster/viewoffer.php?id=<?php echo $joboffer['id']; ?>" target="__blank" class="btn btn--large btn--dark-lighter btn--transparent full-width">Перейти к офферу</a>
+										<a href="/webmaster/viewoffer?id=<?php echo $joboffer['id']; ?>" target="__blank" class="btn btn--large btn--dark-lighter btn--transparent full-width">Перейти к офферу</a>
 									</div>
 								</div>
 							</div>

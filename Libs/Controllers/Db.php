@@ -1,67 +1,48 @@
-<?
+<?php
 	/**
 	 * Файл, отвечающий за БД и операции с ней	
 	**/
 
+    namespace Libs\Controllers;
+
+    use Libs\Traits;
+
 	class Db
 	{
-		/* Конструктор, проверяющий авторизацию */
-		function __construct($userLogin, $requireAuth)
-		{
-			session_start();
-			
-			//ini_set('error_reporting', E_ALL);
-            //ini_set('display_errors', 1);
-            //ini_set('display_startup_errors', 1);
+        use Traits\Db, Traits\Offer;
 
+		/* Конструктор, проверяющий авторизацию */
+		public function __construct($userLogin, $requireAuth)
+		{
+            if (!$_SESSION) {
+                session_start();
+            }
 
 			$_SESSION['last_url'] = $_SERVER['REQUEST_URI'];
 
-			$userData = $this->userSelect();
+			$userData = self::userSelect();
 			if($userData['blocked'] == 1 && $_SERVER['REQUEST_URI'] != '/banned.php'){
 				header("Location: /banned.php");
 			}
 		}
 
-		function connect(){
-			// Данные от БД
-			$host = "localhost";
-			$user = "meemoney_main";
-			$password = "d*0W%2O5";
-			$name = "meemoney_main";
-
-			$mysqli_connect = mysqli_connect($host, $user, $password, $name);
-			mysqli_set_charset($mysqli_connect, "utf8");
-
-			return $mysqli_connect;
-		}
-
-		/* Функция запроса в БД */
-		function query($query){
-			$ready_query = $query." SET NAMES 'utf8'";
-			mysqli_set_charset($this->connect(), "utf8");
-			return mysqli_query($this->connect(), $query);
-		}
-		
-		function fQuery($query){
-			$ready_query = $query." SET NAMES 'utf8'";
-			mysqli_set_charset($this->connect(), "utf8");
-			return mysqli_fetch_assoc(mysqli_query($this->connect(), $query));
-		}
-
 		/* Выделение пользователя */
-		function userSelect(){
-			session_start();
+		public static function userSelect()
+        {
+			if (!$_SESSION) {
+                session_start();
+            }
 
-			return mysqli_fetch_assoc($this->query("SELECT * FROM `users` WHERE `email`='".$_SESSION['email']."'"));
+			return mysqli_fetch_assoc(self::query("SELECT * FROM `users` WHERE `email`='".$_SESSION['email']."'"));
 		}
 
 		/* Проверка типа пользователя и редирект */
-		function typeCheck(){
+		public static function typeCheck()
+        {
 			session_start();
 
 			if(isset($_SESSION['auth']) && $_SESSION['email'] != ''):
-				$user = $this->userSelect();
+				$user = self::userSelect();
 
 				if($user['type'] == 'webmaster'):
 					header("Location: /webmaster/");
@@ -74,7 +55,8 @@
 		}
 
 		/* Проверка авторизации пользователя */
-		function authCheck(){
+		function authCheck()
+        {
 			session_start();
 
 			if($_SESSION['auth'] == true && $_SESSION['email'] != '') $this->typeCheck();
@@ -96,7 +78,8 @@
 		}
 
 		/* Генерации символов */
-		function generate($type, $length){
+		public static function generate($type, $length)
+        {
 			$chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHI JKLMNOPRQSTUVWXYZ0123456789";
 		    $code = "";
 
@@ -109,17 +92,20 @@
 		}
 
 		/* Выбор из БД записей в опред. период времени */
-		function exportWithDate($from, $dc, $d,$m,$y){
+		function exportWithDate($from, $dc, $d,$m,$y)
+        {
             return $this->query("SELECT * FROM `$from` WHERE `$dc` LIKE '$y-$m-$d'");
         }
 
         /* Выбор из БД записей в опред. день недели */
-		function exportInPeriod($from, $dc, $day){
+		function exportInPeriod($from, $dc, $day)
+        {
             return $this->query("SELECT * FROM `$from` WHERE `$dc` LIKE '".date('Y-m-d', time() - (86400 * $day))." %%:%%:%%'");
         }
 
 		/* Трансляция из кириллицы в латиницу */
-		function translate($s){
+		function translate($s)
+        {
 			$s = (string) $s; // преобразуем в строковое значение
 			  $s = strip_tags($s); // убираем HTML-теги
 			  $s = str_replace(array("\n", "\r"), " ", $s); // убираем перевод каретки
@@ -133,13 +119,15 @@
 		}
 
 		/* Достаём количество записей */
-		function countEcho($userQuery){
+		function countEcho($userQuery)
+        {
 			$query = $this->query($userQuery);
 			return mysqli_num_rows($query);
 		}
 
 		/* Image upload */
-		function uploadImage($fileName, $path, $uploadDir = '../../upload/offers/'){
+		function uploadImage($fileName, $path, $uploadDir = '../../upload/offers/')
+        {
 			/* Генерация имени файла:
 				>> ID пользователя + дата + рандомное число от 1111 до 9999 + расширение файла
 			*/
@@ -169,7 +157,8 @@
 
 		/* Удаление всех куки: foreach($_COOKIE as $key => $value) setcookie($key, '', time() - 3600, '/'); */
 		
-		function sendMail($to, $subject, $message) {
+		function sendMail($to, $subject, $message)
+        {
             /* Для отправки HTML-почты вы можете установить шапку Content-type. */
             $headers= "MIME-Version: 1.0\r\n";
             
@@ -183,28 +172,12 @@
 		}
 
 		/* Офферы */
-		function exOffers($uoffers){
-			while($offer = mysqli_fetch_assoc($uoffers)): if($offer['modercheck'] == 1 && $offer['web_show'] == 1):?>
-			<div class="col-xl-3 col-lg-4 col-md-6 col-sm-6">
-				<div class="card">
-					<div class="body product_item" style="/*min-height: 326px;*/">
-						<?php if($offer['action'] != ''): ?><span class="label new" style="background: #f15353;"><?php echo $offer['action']; ?></span><?php endif; ?>
-						<!--span class="label onsale">Популярный</span-->
-						<div class="text-center" style="height:250px;display:flex;align-items: center;text-align: center;justify-content: center;"><img src="/upload/offers/<?echo $offer['image'];?>" style="width:100%;" alt="Product" class="img-fluid cp_img" /></div>
-						<div class="product_details">
-							<a href="viewoffer.php?id=<?echo $offer['id'];?>"><p><?php echo $offer['name']; ?></p></a>
-							<ul class="product_price list-unstyled">
-								<li class="old_price" style="color:#ee2558;">Холд: <?echo $offer['hold'];?> дней</li>
-								<li class="new_price" style="font-size:16px;"><?echo $offer['leadPrice'];?>₽</li>
-							</ul>                                
-						</div>
-						<div class="action">
-							<!--a href="viewoffer.php?id=<?#echo $offer['id'];?>" class="btn btn-info waves-effect"><i class="zmdi zmdi-eye"></i></a-->
-							<a href="viewoffer.php?id=<?echo $offer['id'];?>" class="btn btn-primary waves-effect">Подробнее</a>
-						</div>
-					</div>
-				</div>                
-			</div>
-			<?endif; endwhile;
+		public static function exOffers($uoffers)
+        {
+			while($offer = mysqli_fetch_assoc($uoffers)):
+                if($offer['modercheck'] == 1 && $offer['web_show'] == 1):
+                    echo Traits\Offer::executeOffer($offer);
+                endif;
+            endwhile;
 		}
 	}

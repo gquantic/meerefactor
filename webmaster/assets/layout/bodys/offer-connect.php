@@ -34,7 +34,7 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="header">
-                            <h2>Подключение к Офферу <a href="viewoffer.php?id=<?echo $offer['id'];?>">"<?echo $offer['name'];?>"</a></h2>
+                            <h2>Подключение к Офферу <a href="viewoffer?id=<?echo $offer['id'];?>">"<?echo $offer['name'];?>"</a></h2>
                         </div>
                         <div class="body">
                                 <div class="row">
@@ -86,7 +86,7 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="header">
-                            <h2>Подключение к Офферу <a href="viewoffer.php?id=<?echo $offer['id'];?>">"<?echo $offer['name'];?>"</a></h2>
+                            <h2>Подключение к Офферу <a href="viewoffer?id=<?echo $offer['id'];?>">"<?echo $offer['name'];?>"</a></h2>
                         </div>
                         <div class="body">
                             <div class="form-group">

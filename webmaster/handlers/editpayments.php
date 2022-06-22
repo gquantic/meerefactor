@@ -4,12 +4,12 @@
 	*/
 
 	//Подключение всех библиотек 
-	require_once "../../libs/db.php";
+	require_once "/libs/contrDb.php/Db.php";
 	$_Db = new Db(1, 1);
 
 	session_start();
 
-	$userData = $_Db->userSelect();
+	$userData = \Libs\Controllers\Db::userSelect();
 
 	$userId = $userData['id'];
 
@@ -19,7 +19,7 @@
 	$qiwi = trim(strip_tags($_POST['qiwi']));
 
 	if($userData['password'] == md5($_POST['pass'])){
-		$set = $_Db->query("UPDATE `users` SET `ymoney`='$yandexMoney', `webmoney`='$webmoney', `bcard`='$card', `qiwi`='$qiwi' WHERE `id`='$userId'");
+		$set = \Libs\Controllers\Db::query("UPDATE `users` SET `ymoney`='$yandexMoney', `webmoney`='$webmoney', `bcard`='$card', `qiwi`='$qiwi' WHERE `id`='$userId'");
 
 		if(!empty($set)) echo "success";
 		else echo "error__except";

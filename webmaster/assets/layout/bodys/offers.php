@@ -89,7 +89,7 @@
                     <div class="card">
                         <div class="body">                            
                             <div class="row clearfix" id="offerscontent">
-                                <?php $db->exOffers($uoffers); ?>
+                                <?php \Libs\Controllers\Db::exOffers($uoffers); ?>
                             </div>
                         </div>
                     </div>

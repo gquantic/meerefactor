@@ -1,8 +1,9 @@
-<?
-	class Leads extends Db{
+<?php
+	class Leads extends Db
+    {
 		private $token = '8da5de493dd523a2d23d4130a3c3b9de';
 
-		function __construct(){
+		function __construct() {
 
 		}
 		

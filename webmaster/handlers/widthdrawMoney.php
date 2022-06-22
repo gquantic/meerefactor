@@ -1,6 +1,6 @@
 <?php
 	//Подключение всех библиотек 
-	require_once "../../libs/db.php";
+	require_once "/libs/contrDb.php/Db.php";
 	$db = new Db(1, 1);
 
 	session_start();

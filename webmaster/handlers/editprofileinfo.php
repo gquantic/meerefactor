@@ -4,12 +4,12 @@
 	*/
 
 	//Подключение всех библиотек 
-	require_once "../../libs/db.php";
+	require_once "/libs/contrDb.php/Db.php";
 	$_Db = new Db(1, 1);
 
 	session_start();
 
-	$userData = $_Db->userSelect();
+	$userData = \Libs\Controllers\Db::userSelect();
 
 	$pass = md5($_POST['pass']);
 	$userId = $userData['id'];
@@ -30,7 +30,7 @@
 	$senler = $_POST['senler'];
 
 	if($userData['password'] == $pass){
-		$set = $_Db->query("UPDATE `users` SET `name`='$name', `telegram`='$telegram', `about_yourself`='$about', `other_view`='$view', `notifications`='$notifications', `senler`='$senler' WHERE `id`='$userId'");
+		$set = \Libs\Controllers\Db::query("UPDATE `users` SET `name`='$name', `telegram`='$telegram', `about_yourself`='$about', `other_view`='$view', `notifications`='$notifications', `senler`='$senler' WHERE `id`='$userId'");
 
 		if(!empty($set)) echo "success";
 		else echo "error__except";

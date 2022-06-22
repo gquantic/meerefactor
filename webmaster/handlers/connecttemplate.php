@@ -1,7 +1,7 @@
 <?php
     session_start();
     
-    include "../../libs/db.php";
+    include "/libs/contrDb.php/Db.php";
     $db = new Db(0,0);
     
     $ud = $db->userSelect();
@@ -24,6 +24,6 @@
     
     $db->query("INSERT INTO `ofconnect` (`offid`, `webid`, `tempid`) VALUES ('$offer', '".$ud['id']."', '$tempid')");
     
-    $location = "/webmaster/viewoffer.php?id=".$offer;
+    $location = "/webmaster/viewoffer?id=".$offer;
     header("Location: ".$location);
 ?>
