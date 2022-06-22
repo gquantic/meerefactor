@@ -18,7 +18,12 @@ trait Db
         return $mysqli_connect;
     }
 
-    /* Функция запроса в БД */
+    /**
+     * Запрос в базу
+     *
+     * @param $query
+     * @return bool|\mysqli_result
+     */
     public static function query($query)
     {
         $ready_query = $query." SET NAMES 'utf8'";
@@ -27,6 +32,12 @@ trait Db
         return mysqli_query(self::connect(), $query);
     }
 
+    /**
+     * Запрос с преобразованным ответом
+     *
+     * @param $query
+     * @return array|false|null
+     */
     public static function fQuery($query)
     {
         $ready_query = $query." SET NAMES 'utf8'";

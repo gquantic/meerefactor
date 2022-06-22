@@ -20,7 +20,7 @@ if(isset($_POST['auth'])){
             if(md5($password) == $user['password']){
                 Site::startSession();
 
-                $code = Db::generate("int", 16);
+                $code = Db::generate(16);
 
                 $_SESSION['auth'] = true;
                 $_SESSION['email'] = $email;

@@ -3,25 +3,27 @@
 namespace Libs\Controllers;
 
 /**
- * Файл, структуру и отображение сайта
- **/
+ * Класс для работы со структурой сайта
+ */
 class Site
 {
-    /* Получение адреса */
+    /**
+     * Получение адреса
+     *
+     * @return false|string
+     */
     public static function uri()
     {
         $uri_parts = explode('?', $_SERVER['REQUEST_URI'], 2);
-        // и затем используем "левую" часть:
-        return substr($uri_parts[0], 1);
+        return substr($uri_parts[0], 1); // и затем используем "левую" часть:
     }
 
-    public static function includeView($view)
-    {
-
-    }
-
-    /* Генерация имени */
-    public static function pageName()
+    /**
+     * Генерация имени
+     *
+     * @return string
+     */
+    public static function pageName(): string
     {
         $uri = self::uri();
 
@@ -50,10 +52,27 @@ class Site
         return $name;
     }
 
+    /**
+     * Запуск сессии
+     *
+     * @return void
+     */
     public static function startSession()
     {
         if (!$_SESSION) {
             session_start();
+        }
+    }
+
+    /**
+     * Закрытие сессии
+     *
+     * @return void
+     */
+    public static function closeSession()
+    {
+        if ($_SESSION) {
+            session_destroy();
         }
     }
 }
