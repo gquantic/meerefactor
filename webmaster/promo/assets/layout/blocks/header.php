@@ -8,14 +8,14 @@
     <meta name="description" content="Партнёрская программа MeeMoney">
     <meta name="author" content="Ssapphire inc.">
     <title>MeeMarket | Партнёрская программа MeeMoney</title>
-    <link rel="stylesheet" href="assets/layout/blocks/assets/plugins/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/layout/blocks/assets/plugins/jvectormap/jquery-jvectormap-2.0.3.min.css"/>
-    <link rel="stylesheet" href="assets/layout/blocks/assets/plugins/charts-c3/plugin.css"/>
+    <link rel="stylesheet" href="/assets/template/plugins/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/assets/template/plugins/jvectormap/jquery-jvectormap-2.0.3.min.css"/>
+    <link rel="stylesheet" href="/assets/template/plugins/charts-c3/plugin.css"/>
 
-    <link rel="stylesheet" href="assets/layout/blocks/assets/plugins/morrisjs/morris.min.css" />
+    <link rel="stylesheet" href="/assets/template/plugins/morrisjs/morris.min.css" />
 
     <!-- Custom Css -->
-    <link rel="stylesheet" href="assets/layout/blocks/assets/css/style.min.css">
+    <link rel="stylesheet" href="/assets/template/css/style.min.css">
 
     <!-- Interactive JS -->
     <script type="text/javascript" src="libs/ui.js"></script>
@@ -24,15 +24,15 @@
     <script src="https://kit.fontawesome.com/ada758ae4a.js" crossorigin="anonymous"></script>
 
     <!-- Bootstrap Select Css -->
-<link rel="stylesheet" href="/webmaster/assets/layout/blocks/assets/layout/blocks/assets/plugins/bootstrap-select/css/bootstrap-select.css" />
+<link rel="stylesheet" href="/assets/template/assets/plugins/bootstrap-select/css/bootstrap-select.css" />
 
 <!-- Multi Select Css -->
-<link rel="stylesheet" href="/webmaster/assets/layout/blocks/assets/layout/blocks/assets/plugins/multi-select/css/multi-select.css">
+<link rel="stylesheet" href="/assets/template/assets/plugins/multi-select/css/multi-select.css">
 <!-- Select2 -->
-<link rel="stylesheet" href="/webmaster/assets/layout/blocks/assets/layout/blocks/assets/plugins/select2/select2.css" />
+<link rel="stylesheet" href="/assets/template/assets/plugins/select2/select2.css" />
 
 <!-- JQuery DataTable Css -->
-<link rel="stylesheet" href="/webmaster/assets/layout/blocks/assets/layout/blocks/assets/plugins/jquery-datatable/dataTables.bootstrap4.min.css">
+<link rel="stylesheet" href="/assets/template/assets/plugins/jquery-datatable/dataTables.bootstrap4.min.css">
 
     <!-- Jquery -->
     <script

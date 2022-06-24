@@ -91,11 +91,11 @@
 </section>
 
 <!-- Js -->
-<script src="assets/layout/blocks/assets/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.js"></script> <!-- Bootstrap Colorpicker Js --> 
-<script src="assets/layout/blocks/assets/plugins/jquery-inputmask/jquery.inputmask.bundle.js"></script> <!-- Input Mask Plugin Js --> 
-<script src="assets/layout/blocks/assets/plugins/multi-select/js/jquery.multi-select.js"></script> <!-- Multi Select Plugin Js --> 
-<script src="assets/layout/blocks/assets/plugins/jquery-spinner/js/jquery.spinner.js"></script> <!-- Jquery Spinner Plugin Js --> 
-<script src="assets/layout/blocks/assets/plugins/bootstrap-tagsinput/bootstrap-tagsinput.js"></script> <!-- Bootstrap Tags Input Plugin Js --> 
-<script src="assets/layout/blocks/assets/plugins/nouislider/nouislider.js"></script> <!-- noUISlider Plugin Js -->
+<script src="/assets/template/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.js"></script> <!-- Bootstrap Colorpicker Js --> 
+<script src="/assets/template/plugins/jquery-inputmask/jquery.inputmask.bundle.js"></script> <!-- Input Mask Plugin Js --> 
+<script src="/assets/template/plugins/multi-select/js/jquery.multi-select.js"></script> <!-- Multi Select Plugin Js --> 
+<script src="/assets/template/plugins/jquery-spinner/js/jquery.spinner.js"></script> <!-- Jquery Spinner Plugin Js --> 
+<script src="/assets/template/plugins/bootstrap-tagsinput/bootstrap-tagsinput.js"></script> <!-- Bootstrap Tags Input Plugin Js --> 
+<script src="/assets/template/plugins/nouislider/nouislider.js"></script> <!-- noUISlider Plugin Js -->
 
-<script src="assets/layout/blocks/assets/plugins/select2/select2.min.js"></script> <!-- Select2 Js -->
+<script src="/assets/template/plugins/select2/select2.min.js"></script> <!-- Select2 Js -->

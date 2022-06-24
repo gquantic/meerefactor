@@ -69,7 +69,7 @@
                     </div>
                 </div>
             </div></a>
-        </div>
+        </div
 
         <?php if(mysqli_num_rows($debcard) > 0): ?>
         <div class="row clearfix">
@@ -82,7 +82,7 @@
             </div>
         </div>
         <div class="row clearfix">
-            <?php \Libs\Controllers\Db::exOffers($debcard); ?>
+            <?php \Libs\Traits\Offer::getOffers($debcard); ?>
         </div>
         <?php endif; ?>
         
@@ -97,7 +97,7 @@
             </div>
         </div>
         <div class="row clearfix">
-            <?php \Libs\Controllers\Db::exOffers($credcard); ?>
+            <?php \Libs\Traits\Offer::getOffers($credcard); ?>
         </div>
         <?php endif; ?>
 
@@ -113,7 +113,7 @@
         <div>
         
         <div class="row clearfix">
-            <?php \Libs\Controllers\Db::exOffers($games); ?>
+            <?php \Libs\Traits\Offer::getOffers($games); ?>
         </div>
         <?php endif; ?>
         
@@ -129,7 +129,7 @@
         </div>
         
         <div class="row clearfix">
-            <?php \Libs\Controllers\Db::exOffers($loan); ?>
+            <?php \Libs\Traits\Offer::getOffers($loan); ?>
         </div>
         <?php endif; ?>
         
@@ -145,7 +145,7 @@
             </div>
         </div>
         <div class="row clearfix">
-            <?php \Libs\Controllers\Db::exOffers($job); ?>
+            <?php \Libs\Traits\Offer::getOffers($job); ?>
         </div>
         <?php endif; ?>
     </div>
@@ -155,7 +155,7 @@
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content mee_liga_modal">
             <div class="modal-header">
-                <h4 class="title" id="largeModalLabel"><?= $state['title']; ?></h4>
+                <h4 class="title" id="largeModalLabel">Старт марафона - MeeMaster!</h4>
             </div>
             <div class="modal-body">
                 

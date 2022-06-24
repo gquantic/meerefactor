@@ -9,5 +9,7 @@ $job = \Libs\Controllers\Db::query("SELECT * FROM `offers` WHERE `modercheck`='1
 
 $loan = \Libs\Controllers\Db::query("SELECT * FROM `offers` WHERE `modercheck`='1' AND `top`=1 AND `web_show`='1' AND `category` LIKE ('%%loan%%') LIMIT 8");
 
+//var_dump($debcard);
+
 // Получаем данные о запрашиваемой странице
 $pageName = "Главная";

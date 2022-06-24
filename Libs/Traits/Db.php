@@ -9,8 +9,8 @@ trait Db
         // Данные от БД
         $host = "localhost";
         $user = "root";
-        $password = "";
-        $name = "meerefactor";
+        $password = "root";
+        $name = "meemoney";
 
         $mysqli_connect = mysqli_connect($host, $user, $password, $name);
         mysqli_set_charset($mysqli_connect, "utf8");

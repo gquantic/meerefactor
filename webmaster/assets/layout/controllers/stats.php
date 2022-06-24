@@ -1,31 +1,27 @@
 <?php
 
-//Подключаем графики
-require_once $_SERVER['DOCUMENT_ROOT'] . "/Libs/api.php";
-$leads = new Leads();
+use Libs\Controllers\Db;
+use Libs\Controllers\Leads;
 
 // С какой записи выводим и сколько
-if(!isset($_GET['convpage']) || $_GET['convpage'] == 0) $whereSelect = 1;
-else $whereSelect = $_GET['convpage'];
+//if(!isset($_GET['convpage']) || $_GET['convpage'] == 0) $whereSelect = 1;
+//else $whereSelect = $_GET['convpage'];
 
-$convCount = 10;
+//$convCount = 10;
 
-$userId = \Libs\Controllers\Db::userSelect()['id'];
-$conversions = \Libs\Controllers\Db::query("SELECT * FROM `conversions` WHERE `webmaster_id`='$userId' ORDER BY `id` DESC");
-$referals = \Libs\Controllers\Db::query("SELECT * FROM `users` WHERE `referal`='$userId'");
+$userId = Db::userSelect()['id'];
+$conversions = Db::query("SELECT * FROM `conversions` WHERE `webmaster_id`='$userId' ORDER BY `id` DESC");
+$conversionsRejected = Db::query("SELECT * FROM `conversions` WHERE `webmaster_id`='$userId' AND `status`='rejected' ORDER BY `id` DESC");
+$referrals = Db::query("SELECT * FROM `users` WHERE `referal`='$userId'");
 
 // Достаём реферальные конверсии
-$refСonvs = array();
-while ($referal = mysqli_fetch_assoc($referals)) {
-    $conversion = mysqli_fetch_assoc(\Libs\Controllers\Db::query("SELECT * FROM `conversions` WHERE `webmaster_id`='".$referal['id']."'"));
-    array_push($refСonvs, $conversion);
+$referralActive = array();
+while ($referral = mysqli_fetch_assoc($referrals)) {
+    $conversion = mysqli_fetch_assoc(\Libs\Controllers\Db::query("SELECT * FROM `conversions` WHERE `webmaster_id`='".$referral['id']."'"));
+    $referralActive[] = $conversion;
 }
 
 // Получаем данные о запрашиваемой странице
 $pageName = "Статистика и конверсии";
 
-#var_dump($leads->request("reports", "offset=0&grouping=month&aff_sub1"));
-
-$leadsStat = $leads->getReportsStatic();
-
-var_dump($leadsStat);
+$leadsStat = \Libs\Controllers\Leads::init();

@@ -216,19 +216,4 @@ class Db
 
         mail($to, $subject, $message, $headers);
     }
-
-    /**
-     * Извлечение офферов
-     *
-     * @param $uoffers
-     * @return void
-     */
-    public static function exOffers($uoffers)
-    {
-        while($offer = mysqli_fetch_assoc($uoffers)):
-            if($offer['modercheck'] == 1 && $offer['web_show'] == 1):
-                echo Traits\Offer::executeOffer($offer);
-            endif;
-        endwhile;
-    }
 }

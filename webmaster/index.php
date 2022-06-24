@@ -29,6 +29,8 @@ if ($getVariables !== false) {
 if(!isset($_SESSION['type'])) header("Location: /");
 else if($_SESSION['type'] != 'webmaster') header("Location: /");
 
+$uri == '' ? $uri = 'index' : $uri;
+
 // Если есть обработчик, то подключаем
 if (file_exists("assets/layout/controllers/{$uri}.php")) {
     include "assets/layout/controllers/{$uri}.php";

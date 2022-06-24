@@ -22,7 +22,9 @@
                 <div class="card widget_2 big_icon traffic">
                     <div class="body">
                         <h6>Клики</h6>
-                        <h2 style="color:#1d29c0;"><?echo $leadsStat['all']['clicks'];?></h2>
+                        <h2 style="color:#1d29c0;">
+                            <?= $leadsStat['clicks']; ?>
+                        </h2>
                         <!--small>на 0% больше, чем в прошлом месяце</small>
                         <div class="progress">
                             <div class="progress-bar l-amber" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"></div>
@@ -34,7 +36,9 @@
                 <div class="card widget_2 big_icon sales">
                     <div class="body">
                         <h6>Конверсии</h6>
-                        <h2 style="color:#fa6801;"><?echo $leadsStat['all']['conversions'];?></h2>
+                        <h2 style="color:#fa6801;">
+                            <?= mysqli_num_rows($conversions); ?>
+                        </h2>
                         <!--small>на 0% больше, чем в прошлом месяце</small>
                         <div class="progress">
                             <div class="progress-bar l-blue" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"></div>
@@ -46,7 +50,9 @@
                 <div class="card widget_2 big_icon email">
                     <div class="body">
                         <h6>Отклонённые</h6>
-                        <h2><?echo $leadsStat['all']['rejected_conversions'];?> 0</h2>
+                        <h2>
+                            <?= mysqli_num_rows($conversionsRejected); ?>
+                        </h2>
                         <!--small>На 0% больше, чем в прошлом месяце</small>
                         <div class="progress">
                             <div class="progress-bar l-purple" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"></div>
@@ -219,27 +225,39 @@
                                                 </tr>
                                             </tfoot>
                                             <tbody>
-                                                <?for($i = 0; $i <= count($refСonvs); $i++){
-                                                  if($refСonvs[$i] != ''){
-                                                    $meeOffer = mysqli_fetch_assoc(\Libs\Controllers\Db::query("SELECT * FROM `offers` WHERE `id`='".$refСonvs[$i]['offer_id']."'"));
-                                                    $convRef = mysqli_fetch_assoc(\Libs\Controllers\Db::query("SELECT * FROM `users` WHERE `id`='".$refСonvs[$i]['webmaster_id']."'"));
+                                                <?php
+                                                if (count($referralActive) > 0):
+                                                for($i = 0; $i <= count($referralActive); $i++){
+                                                  if($referralActive[$i] != ''){
+                                                    $meeOffer = mysqli_fetch_assoc(\Libs\Controllers\Db::query("SELECT * FROM `offers` WHERE `id`='".$referralActive[$i]['offer_id']."'"));
+                                                    $referralActive = mysqli_fetch_assoc(\Libs\Controllers\Db::query("SELECT * FROM `users` WHERE `id`='".$referralActive[$i]['webmaster_id']."'"));
                                                     ?>
                                                 <tr>
-                                                    <td><a href="viewoffer?id=<?echo $refСonvs[$i]['offer_id'];?>">
+                                                    <td><a href="viewoffer?id=<?echo $referralActive[$i]['offer_id'];?>">
                                                         <?if($meeOffer['name'] != ''){?>
                                                             <?=$meeOffer['name'];?>
                                                         <?}else{?>
                                                             Не удалось прогрузить данные
                                                         <?}?>
                                                     </a></td>
-                                                    <td><?if($refСonvs[$i]['created'] != '') echo substr($refСonvs[$i]['created'], 0, 16); else echo substr(str_replace('-', '.', $refСonvs[$i]['autodate']), 0, 16);?></td>
-                                                    <td><?echo 20 * ($refСonvs[$i]['price'] / 100)?>₽</td>
-                                                    <td><?echo $convRef['name']?></td>
-                                                    <td><?if($refСonvs[$i]['status'] == 'pending'):?><span style="color:#ff6100;">Ожидание</span><?elseif($refСonvs[$i]['status'] == 'rejected'):?>
+                                                    <td><?if($referralActive[$i]['created'] != '') echo substr($referralActive[$i]['created'], 0, 16); else echo substr(str_replace('-', '.', $referralActive[$i]['autodate']), 0, 16);?></td>
+                                                    <td><?echo 20 * ($referralActive[$i]['price'] / 100)?>₽</td>
+                                                    <td><?echo $referralActive['name']?></td>
+                                                    <td><?if($referralActive[$i]['status'] == 'pending'):?><span style="color:#ff6100;">Ожидание</span><?elseif($referralActive[$i]['status'] == 'rejected'):?>
                                                     <span style="color:red;">Отклонен</span>
                                                     <?else:?><span style="color:green;">Принят</span><?endif;?></td>
                                                 </tr>
-                                                <?}}?>
+                                                <?php
+                                                  }}
+                                                else:
+                                                ?>
+                                                    <tr>
+                                                        <td colspan="5">
+                                                            <p class="mb-0">Реферальных конверсий ещё не было :(</p>
+                                                            <a href="/webmaster/referals">Начните приглашать прямо сейчас!</a>
+                                                        </td>
+                                                    </tr>
+                                                <?php endif; ?>
                                             </tbody>
                                         </table>
                                     </div>

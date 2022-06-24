@@ -3,9 +3,21 @@
 namespace Libs\Traits;
 
 trait Offer {
+    /**
+     * Извлечение офферов
+     *
+     * @param $objects - массив с офферами
+     * @return void
+     */
+    public static function getOffers($objects) {
+        foreach ($objects as $object) {
+            self::executeOffer($object);
+        }
+    }
+
     public static function executeOffer($offer)
     {
-        return ?>
+        ?>
             <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6">
                 <div class="card">
                     <div class="body product_item" style="/*min-height: 326px;*/">
