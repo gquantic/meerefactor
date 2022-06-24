@@ -59,7 +59,7 @@ class Site
      */
     public static function startSession()
     {
-        if (!$_SESSION) {
+        if (!isset($_SESSION)) {
             session_start();
         }
     }
