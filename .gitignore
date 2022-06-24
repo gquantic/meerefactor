@@ -4,3 +4,4 @@ advertiser/
 promo/js/
 **/blocks/assets/
 /vendor/
+Libs/Traits/Db.php
