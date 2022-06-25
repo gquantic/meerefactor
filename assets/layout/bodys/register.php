@@ -1,17 +1,23 @@
 <?
 $errors = array();
 
+use Libs\Controllers\Db;
+
+ini_set('error_reporting', E_ALL);
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+
 if(isset($_POST['reg'])){
 	$name = $_POST['name'];
 	$email = $_POST['email'];
 	$password = $_POST['password'];
 	$password_nohash = $_POST['password'];
 	$repassword = $_POST['repassword'];
-	$promocode = $_POST['promocode'];
+	$promocode = $_POST['promo'];
 	$phone = $_POST['phone'];
 
 	if($promocode != ''){
-		$referalId = mysqli_fetch_assoc($_Db->query("SELECT * FROM `users` WHERE `promocode`='$promocode' LIMIT 1"));
+		$referalId = mysqli_fetch_assoc(Db::query("SELECT * FROM `users` WHERE `promocode`='$promocode' LIMIT 1"));
 		$referalId = $referalId['id'];
 	}elseif($_COOKIE['referalId']){
 		$referalId = $_COOKIE['referalId'];
@@ -39,7 +45,7 @@ if(isset($_POST['reg'])){
 	}
 
 	if(empty($errors)){
-		$users = $_Db->query("SELECT * FROM `users` WHERE `email`='$email'");
+		$users = Db::query("SELECT * FROM `users` WHERE `email`='$email'");
 
 		if(mysqli_num_rows($users) > 0){
 			$errors[] = 'Пользователь с таким Email уже существует!';
@@ -51,9 +57,9 @@ if(isset($_POST['reg'])){
 
 			$password = md5($password);
 			if($referalId != '' && isset($promocode)){
-			    $reg = $_Db->query("INSERT INTO `users` (`name`, `email`, `password`, `promocode`, `referal`, `meecoins`, `phone`) VALUES ('$name', '$email', '$password', '$finalPromocode', '$referalId', '1000', '$phone')");
+			    $reg = Db::query("INSERT INTO `users` (`name`, `email`, `password`, `promocode`, `referal`, `meecoins`, `phone`) VALUES ('$name', '$email', '$password', '$finalPromocode', '$referalId', '1000', '$phone')");
 			}else{
-			    $reg = $_Db->query("INSERT INTO `users` (`name`, `email`, `password`, `promocode`, `referal`, `phone`) VALUES ('$name', '$email', '$password', '$finalPromocode', '$referalId', '$phone')");
+			    $reg = Db::query("INSERT INTO `users` (`name`, `email`, `password`, `promocode`, `referal`, `phone`) VALUES ('$name', '$email', '$password', '$finalPromocode', '$referalId', '$phone')");
 			}
 
 			if(empty($reg)) $errors[] = 'Неизвестная ошибка, пожалуйста, попробуйте снова.';
@@ -62,7 +68,7 @@ if(isset($_POST['reg'])){
 				$_SESSION['type'] = 'webmaster';
 				$_SESSION['email'] = $email;
 				
-				$_Db->sendMail($email, "Успешная регистрация!", "Вы успешно зарегистрировались! <br> Ваш Email: ".$email."<br>Ваш пароль: ".$repassword."<br><br><a href='lk.meemoney.ru'>Войти в личный кабинет</a>");
+				Db::sendMail($email, "Успешная регистрация!", "Вы успешно зарегистрировались! <br> Ваш Email: ".$email."<br>Ваш пароль: ".$repassword."<br><br><a href='lk.meemoney.ru'>Войти в личный кабинет</a>");
 				
 				header("Location: /webmaster/");
 			}
@@ -137,37 +143,37 @@ if(isset($_POST['reg'])){
 	                    <form class="" id="" action="" method="POST">
 	                        <div class="form-group form-float">
 	                            <div class="form-line">
-	                                <input type="text" class="form-control" name="name" value="<?#echo $_COOKIE['regName'];?>" required>
+	                                <input type="text" class="form-control" name="name" value="<?php if (isset($_COOKIE['regName'])) echo $_COOKIE['regName']; ?>" required>
 	                                <label class="form-label">Ф.И.О.</label>
 	                            </div>
 	                        </div>
 	                        <div class="form-group form-float">
 	                            <div class="form-line">
-	                                <input type="email" class="form-control" name="email" value="<?#echo $_COOKIE['regEmail'];?>" required>
+	                                <input type="email" class="form-control" name="email" value="<?php if (isset($_COOKIE['regEmail'])) echo $_COOKIE['regEmail']; ?>" required>
 	                                <label class="form-label">Email (Электронная почта)</label>
 	                            </div>
 	                        </div>
                             <div class="form-group form-float">
                                 <div class="form-line">
-                                    <input type="phone" class="form-control" name="phone" placeholder="" value="<?#echo $_COOKIE['regEmail'];?>" required>
+                                    <input type="phone" class="form-control" name="phone" placeholder="" value="<?php if (isset($_COOKIE['regPhone'])) echo $_COOKIE['regPhone']; ?>" required>
                                     <label class="form-label">Номер телефона</label>
                                 </div>
                             </div>
 	                        <div class="form-group form-float">
 	                            <div class="form-line">
-	                                <input type="password" class="form-control" name="password" value="<?#echo $_COOKIE['regPassword'];?>" required>
+	                                <input type="password" class="form-control" name="password" value="" required>
 	                                <label class="form-label">Придумайте пароль</label>
 	                            </div>
 	                        </div>
 	                        <div class="form-group form-float">
 	                            <div class="form-line">
-	                                <input type="password" class="form-control" name="repassword" value="<?#echo $_COOKIE['regRepassword'];?>" required>
+	                                <input type="password" class="form-control" name="repassword" value="" required>
 	                                <label class="form-label">Повторите пароль</label>
 	                            </div>
 	                        </div>
 	                        <div class="form-group form-float">
 	                            <div class="form-line">
-	                                <input type="text" class="form-control" name="promocode" value="<?#echo $_COOKIE['regRepassword'];?>">
+	                                <input type="text" class="form-control" name="promo" value="<?php if (isset($_COOKIE['regPromo'])) echo $_COOKIE['regPromo'];?>">
 	                                <label class="form-label">Промокод (если есть)</label>
 	                            </div>
 	                        </div>
