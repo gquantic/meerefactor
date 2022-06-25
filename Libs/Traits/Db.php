@@ -8,9 +8,9 @@ trait Db
     {
         // Данные от БД
         $host = "localhost";
-        $user = "root";
-        $password = "root";
-        $name = "meemoney";
+        $user = "meemoney_mrf";
+        $password = "MeeRefactored000-AUTH-OK";
+        $name = "meemoney_mrf";
 
         $mysqli_connect = mysqli_connect($host, $user, $password, $name);
         mysqli_set_charset($mysqli_connect, "utf8");

@@ -14,17 +14,21 @@ class Db
      * @param $userLogin - логин пользователя
      * @param $requireAuth - Нужна ли авторизация?
      */
-    public function __construct($userLogin, $requireAuth)
+    public function __construct($userLogin, $requireAuth = false)
     {
         if (!isset($_SESSION)) {
             session_start();
+        }
+        
+        if ($requireAuth !== false) {
+            self::authCheck();
         }
 
         $_SESSION['last_url'] = $_SERVER['REQUEST_URI'];
 
         $userData = self::userSelect();
         if($userData['blocked'] == 1 && $_SERVER['REQUEST_URI'] != '/banned.php'){
-            header("Location: /banned.php");
+           header("Location: /banned.php");
         }
     }
 
@@ -75,22 +79,26 @@ class Db
             session_start();
         }
 
-        if($_SESSION['auth'] == true && $_SESSION['email'] != '') $this->typeCheck();
+        #if($_SESSION['auth'] == true && $_SESSION['email'] != '') self::typeCheck();
 
         if(isset($_COOKIE['utoken'])):
-            $userData = mysqli_fetch_assoc($this->query("SELECT * FROM `users` WHERE `id`='".$_COOKIE['uid']."'"));
+            $userData = mysqli_fetch_assoc(self::query("SELECT * FROM `users` WHERE `id`='".$_COOKIE['uid']."'"));
 
             if($_COOKIE['utoken'] == $userData['token']):
                 $_SESSION['auth'] = true;
                 $_SESSION['email'] = $userData['email'];
                 $_SESSION['type'] = $userData['type'];
 
-                $this->typeCheck();
+                #self::typeCheck();
             else:
                 setcookie("utoken", "0", time()-3000);
                 setcookie("email", "0", time()-3000);
             endif;
         endif;
+        
+        if (!isset($_SESSION['email']) && !isset($_COOKIE['utoken'])) {
+            Header("Location: /login.php");
+        }
     }
 
     /**

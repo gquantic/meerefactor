@@ -10,6 +10,7 @@ use Libs\Controllers\Db;
 use Libs\Controllers\Site;
 
 Site::startSession();
+Db::authCheck();
 
 require_once $_SERVER['DOCUMENT_ROOT'] . '/vendor/autoload.php';
 
