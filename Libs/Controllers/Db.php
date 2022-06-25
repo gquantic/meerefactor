@@ -16,7 +16,7 @@ class Db
      */
     public function __construct($userLogin, $requireAuth)
     {
-        if (!$_SESSION) {
+        if (!isset($_SESSION)) {
             session_start();
         }
 
@@ -35,7 +35,7 @@ class Db
      */
     public static function userSelect()
     {
-        if (!$_SESSION) {
+        if (!isset($_SESSION)) {
             session_start();
         }
 
@@ -71,7 +71,9 @@ class Db
      */
     function authCheck()
     {
-        session_start();
+        if (!isset($_SESION)) {
+            session_start();
+        }
 
         if($_SESSION['auth'] == true && $_SESSION['email'] != '') $this->typeCheck();
 
