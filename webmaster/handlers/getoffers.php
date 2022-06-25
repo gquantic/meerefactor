@@ -1,16 +1,12 @@
-<?
+<?php
+    require_once $_SERVER['DOCUMENT_ROOT'] . '/vendor/autoload.php';
+
 	$cat = $_POST['category'];
-
-	//Подключение всех библиотек 
-	require_once "/libs/contrDb.php/Db.php";
-	$_Db = new Db(1, 1);
-
 
 	switch ($cat) {
 		case 'all':
 				return export(\Libs\Controllers\Db::query("SELECT * FROM `offers` WHERE `modercheck`='1'"));
 		break;
-
 
 		// Финансовые офферы
 		case 'fin_offers':

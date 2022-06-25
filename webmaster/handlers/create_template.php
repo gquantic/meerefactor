@@ -4,12 +4,11 @@
 	*/
 
 	//Подключение всех библиотек 
-	require_once "/libs/contrDb.php/Db.php";
-	$db = new Db(1, 1);
+    require_once $_SERVER['DOCUMENT_ROOT'] . '/vendor/autoload.php';
 
-	session_start();
+    use Libs\Controllers\Db;
 
-	$user = $db->userSelect();
+	$user = Db::userSelect();
 	$uid = $user['id'];
 
 	$name = trim(strip_tags($_POST['tmp_name']));
@@ -29,14 +28,14 @@
 	if(isset($_POST['create_template'])){
 		# echo $name.' '.$template.' '.$tmp_url.' '.$tmp_comm.' '.$tmp_desc;
 
-		$already_exits = $db->query("SELECT * FROM `templates` WHERE `web_id`='$uid' AND `name`='$name' LIMIT 1");
+		$already_exits = Db::query("SELECT * FROM `templates` WHERE `web_id`='$uid' AND `name`='$name' LIMIT 1");
 		if(mysqli_num_rows($already_exits) > 0){
 			$msg = "У вас уже есть площадка с таким именем!";
 			$to = "create-template.php";
 
 			header("Location: /webmaster/displaymessage.php?act=error&msg=$msg&from=$to");
 		}else{
-			$insert = $db->query("INSERT INTO `templates` (web_id, template, url, comment, name, tmp_desc) VALUES ('$uid', '$template', '$tmp_url', '$tmp_comm', '$name', '$tmp_desc')");
+			$insert = Db::query("INSERT INTO `templates` (web_id, template, url, comment, name, tmp_desc) VALUES ('$uid', '$template', '$tmp_url', '$tmp_comm', '$name', '$tmp_desc')");
 
 			if(!empty($insert)){
 				$msg = "Площадка успешно создана!";

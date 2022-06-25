@@ -83,7 +83,6 @@
                                     </ul>
                                 </div>
                             </div>
-
                         </div>  
                     </div>
                     <div class="card">
@@ -111,7 +110,7 @@
             },
 
             function(data){
-                console.log(data);
+                // console.log(data);
                 $('#offerscontent').html(data);
             }
         );

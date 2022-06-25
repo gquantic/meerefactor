@@ -4,10 +4,7 @@
 	*/
 
 	//Подключение всех библиотек 
-	require_once "/libs/contrDb.php/Db.php";
-	$_Db = new Db(1, 1);
-
-	session_start();
+    require_once $_SERVER['DOCUMENT_ROOT'] . '/vendor/autoload.php';
 
 	$userData = \Libs\Controllers\Db::userSelect();
 

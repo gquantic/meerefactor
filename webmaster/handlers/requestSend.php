@@ -4,16 +4,15 @@
 	*/
 
 	//Подключение всех библиотек 
-	require_once "/libs/contrDb.php/Db.php";
-	$db = new Db(1, 1);
+    require_once $_SERVER['DOCUMENT_ROOT'] . '/vendor/autoload.php';
 
-	session_start();
+    use Libs\Controllers\Db;
 
 	$offerId = intval($_POST['id']);
 
-	$userData = $db->userSelect();
+	$userData = Db::userSelect();
 
-	$offerData = $db->query("SELECT * FROM `offers` WHERE `id`='$offerId'");
+	$offerData = Db::query("SELECT * FROM `offers` WHERE `id`='$offerId'");
 	$offerData = mysqli_fetch_assoc($offerData);
 
 	if(isset($_POST['requestCreate'])){
@@ -31,7 +30,7 @@
 
 			header("Location: /webmaster/displaymessage.php?act=error&msg=$msg&from=$to");
 		}else{
-			$insert = $db->query("INSERT INTO `connects` (user_id, advertiser_id, offer_id, template_id, comment) VALUES ('$userId', '$advertiser_id', '$offerId', '$template', '$comment')");
+			$insert = Db::query("INSERT INTO `connects` (user_id, advertiser_id, offer_id, template_id, comment) VALUES ('$userId', '$advertiser_id', '$offerId', '$template', '$comment')");
 
 			if(!empty($insert)){
 				$msg = "Заявка успешно отправлена!";

@@ -4,12 +4,11 @@
 	*/
 
 	//Подключение всех библиотек 
-	require_once "/libs/contrDb.php/Db.php";
-	$db = new Db(1, 1);
+    require_once $_SERVER['DOCUMENT_ROOT'] . '/vendor/autoload.php';
 
-	session_start();
+    use Libs\Controllers\Db;
 
-	$userData = $db->userSelect();
+	$userData = Db::userSelect();
 
 	$userId = $userData['id'];
 
@@ -26,7 +25,7 @@
 		if($userData['referal_balance'] >= $sum){
 			$lastbalance = $userData['referal_balance'] - $sum;
 			$widthbalance = $userData['width_balance'] + $sum;
-			$db->query("UPDATE `users` SET `referal_balance`='$lastbalance', `width_balance`='$widthbalance' WHERE `id`='$userId'");
+			Db::query("UPDATE `users` SET `referal_balance`='$lastbalance', `width_balance`='$widthbalance' WHERE `id`='$userId'");
 
 			echo "suc";
 		}else echo "nomoney";
@@ -34,7 +33,7 @@
 		if($userData['balance'] >= $sum){
 			$lastbalance = $userData['balance'] - $sum;
 			$widthbalance = $userData['width_balance'] + $sum;
-			$db->query("UPDATE `users` SET `width_balance`='$widthbalance', `balance`='$lastbalance' WHERE `id`='$userId'");
+			Db::query("UPDATE `users` SET `width_balance`='$widthbalance', `balance`='$lastbalance' WHERE `id`='$userId'");
 
 			echo "suc";
 		}else echo "nomoney";

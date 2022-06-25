@@ -213,7 +213,7 @@ class Db
      * @param $message - сообщение
      * @return void
      */
-    function sendMail($to, $subject, $message)
+    public static function sendMail($to, $subject, $message)
     {
         /* Для отправки HTML-почты вы можете установить шапку Content-type. */
         $headers= "MIME-Version: 1.0\r\n";
