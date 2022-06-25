@@ -20,7 +20,7 @@
             <div class="col-lg-12">
                 <div class="card">
                     <div class="body">
-                                <?php while($state = mysqli_fetch_assoc($states)): $count = $count + 1;?>
+                                <?php $count = 0; while($state = mysqli_fetch_assoc($states)): $count = $count + 1;?>
                                     <button type="button" class="btn btn-neutral waves-effect m-r-20 faqbtn" style="color:#000;width:100%;text-align:left;" data-toggle="modal" data-target="#largeModal<?= $count; ?>"><?= $state['title']; ?></button>
                                     <!-- Large Size -->
                                     <div class="modal fade" id="largeModal<?= $count; ?>" tabindex="-1" role="dialog">

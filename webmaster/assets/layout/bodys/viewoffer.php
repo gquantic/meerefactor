@@ -81,7 +81,7 @@
                                                 <input type="text" class="form-control" value="https://lk.meemoney.ru/go.php?id=<?echo $offer['id'];?>&wid=<?echo $userData['id'];?>" style="width:100%">
                                             </div>
                                             <div class="col-xl-3 col-lg-4 col-md-4">
-                                                <a href="https://lk.meemoney.ru/go.php?id=<?echo $offer['id'];?>&wid=<?echo $userData['id'];?>" target="_blank">
+                                                <a href="/go.php?id=<?echo $offer['id'];?>&wid=<?echo $userData['id'];?>" target="_blank">
                                                     <button class="btn btn-warning" style="width:100%;color:#fff !important;background: #ff6100;">Заработать <?= $offer['leadPrice'] ?>₽</button>
                                                 </a>
                                             </div>
@@ -97,7 +97,7 @@
                                             <input type="text" class="form-control" value="https://lk.meemoney.ru/go.php?id=<?echo $offer['id'];?>&wid=<?echo $userData['id'];?>" style="width:100%">
                                             </div>
                                             <div class="col-xl-3 col-lg-4 col-md-4">
-                                                <a href="https://lk.meemoney.ru/go.php?id=<?echo $offer['id'];?>&wid=<?echo $userData['id'];?>" target="_blank">
+                                                <a href="/go.php?id=<?echo $offer['id'];?>&wid=<?echo $userData['id'];?>" target="_blank">
                                                     <button class="btn btn-warning" style="width:100%;color:#fff !important;background: #ff6100;">Протестировать продукт</button>
                                                 </a>
                                             </div>
@@ -144,41 +144,41 @@
                                     <div class="row">
                                         <div class="col-lg-4">
                                             <p>Баннер 1:</p>
-                                            <?  $bannerLink1 = '../upload/offers/'.$offer['banner1']; 
+                                            <?php $bannerLink1 = '../upload/offers/'.$offer['banner1'];
                                                 if(file_exists($bannerLink1)):?>
                                                 <a href="/upload/offers/<?echo $offer['banner1'];?>" target="_blank"><img src="/upload/offers/<?echo $offer['banner1'];?>" alt="" width="400px"></a>
-                                            <?  else: ?>
+                                            <?php else: ?>
                                                 <p>Баннер отсутствует</p>
-                                            <?  endif; ?>
+                                            <?php endif; ?>
                                         </div>
 
                                         <div class="col-lg-4">
                                             <p>Баннер 2:</p>
-                                            <?  $bannerLink2 = '../upload/offers/'.$offer['banner2']; 
+                                            <?php $bannerLink2 = '../upload/offers/'.$offer['banner2'];
                                                 if(file_exists($bannerLink2)):?>
                                                 <a href="/upload/offers/<?echo $offer['banner2'];?>" target="_blank"><img src="/upload/offers/<?echo $offer['banner2'];?>" alt="" width="400px"></a>
-                                            <?  else: ?>
+                                            <?php else: ?>
                                                 <p>Баннер отсутствует</p>
-                                            <?  endif; ?>
+                                            <?php endif; ?>
                                         </div>
 
                                         <div class="col-lg-4">
                                             <p>Баннер 3:</p>
-                                            <?  $bannerLink3 = '../upload/offers/'.$offer['banner3']; 
+                                            <?php $bannerLink3 = '../upload/offers/'.$offer['banner3'];
                                                 if(file_exists($bannerLink3)):?>
                                                 <a href="/upload/offers/<?echo $offer['banner3'];?>" target="_blank"><img src="/upload/offers/<?echo $offer['banner3'];?>" alt="" width="400px"></a>
-                                            <?  else: ?>
+                                            <?php else: ?>
                                                 <p>Баннер отсутствует</p>
-                                            <?  endif; ?>
+                                            <?php endif; ?>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="tab-pane" id="about">
-                                    <p>ГЕО: <?echo $offer['geo'];?></p>
-                                    <p>Разрешённые источники: <?echo $offer['socs'];?></p>
-                                    <p>Холд: <?echo $offer['hold'];?> дней</p>
-                                    <p>Запрещённые ГЕО: <?if($offer['blockCountries'] == '') echo "Нет ограничений"; else echo $offer['blockCountries'];?></p>
-                                    <p>Дата добавления: <?echo $offer['add_date'];?></p>
+                                    <p>ГЕО: <?= $offer['geo'];?></p>
+                                    <p>Разрешённые источники: <?= $offer['socs'];?></p>
+                                    <p>Холд: <?= $offer['hold'];?> дней</p>
+<!--                                    <p>Запрещённые ГЕО: --><?php //if($offer['blockCountries'] == '') echo "Нет ограничений"; else echo $offer['blockCountries']; ?><!--</p>-->
+                                    <p>Дата добавления: <?php echo $offer['add_date']; ?></p>
                                 </div>
                                 <div class="tab-pane" id="fulldesc">
                                     <!--pre style="font-size: 14px;"--><?echo $offer['description'];?><!--/pre-->

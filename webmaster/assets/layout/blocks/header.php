@@ -11,7 +11,7 @@ $notifs = \Libs\Controllers\Db::query("SELECT * FROM `notifications` WHERE `foru
     <link rel="shortcut icon" type="image/x-icon" href="/favicon.png">
     <meta name="description" content="Партнёрская программа MeeMoney">
     <meta name="author" content="Ssapphire inc.">
-    <title><?if($pageName != ''){ echo $pageName." | MeeMoney";} else {?>Партнёрская программа MeeMoney<?}?></title>
+    <title><?php if(isset($pageName) && $pageName !== ''): echo $pageName." | MeeMoney"; else: ?>Партнёрская программа MeeMoney<?php endif; ?></title>
     <link rel="stylesheet" href="/assets/template/plugins/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="/assets/template/plugins/jvectormap/jquery-jvectormap-2.0.3.min.css"/>
     <link rel="stylesheet" href="/assets/template/plugins/charts-c3/plugin.css"/>

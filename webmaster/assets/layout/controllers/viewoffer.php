@@ -1,4 +1,4 @@
-<?
+<?php
 
 $id = intval($_GET['id']);
 

@@ -153,10 +153,7 @@
                                         <?endwhile;?>
                                         <?if(mysqli_num_rows($hItems) < 1):?>
                                             <tr>
-                                                <td>...₽</td>
-                                                <td>...</td>
-                                                <td>...</td>
-                                                <td>...</td>
+                                                <td colspan="5">Запросов пока не было :(</td>
                                             </tr>
                                         <?endif;?>
                                     </tbody>
@@ -193,6 +190,9 @@
                                                     <?if($userData['ymoney'] != ''):?>
                                                     <option value="ymoney">Я.Деньги: <b><?=$userData['ymoney']?></b></option>
                                                     <?endif;?>
+                                                    <?if($userData['webmoney'] != ''):?>
+                                                        <option value="webmoney">Webmoney: <b><?=$userData['webmoney']?></b></option>
+                                                    <?endif;?>
                                                 </select>
                                             </div>
                                         </div>
@@ -209,7 +209,7 @@
                                             </div>
                                         </div>
                                         <div class="col-lg-12">
-                                            <p>Если в поле "Платёжные данные" нет информации, то Вам необходимо перейти по этой <a href="/webmaster/profile-edit.php">ссылке</a> и настроить свои реквизиты.</p>
+                                            <p>Если в поле "Платёжные данные" нет информации, то Вам необходимо перейти по этой <a href="/webmaster/assets/layout/controllers/profile-edit.php">ссылке</a> и настроить свои реквизиты.</p>
                                         </div>
                                     </div>
                                 </div>

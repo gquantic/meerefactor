@@ -3,9 +3,6 @@
 *** Главный файл, отвечающий за корень сайта веб-мастера
 */
 
-//Подключение всех библиотек
-use Libs\Controllers\Site;
-
 $userData = \Libs\Controllers\Db::userSelect();
 
 $pageName = 'Офферы';

@@ -29,7 +29,10 @@
 	}elseif($where == 'ymoney'){
 		$paynumbers = $userData['ymoney'];
 		$where = 'Я.Деньги';
-	}
+	}elseif($where == 'webmoney'){
+        $paynumbers = $userData['webmoney'];
+        $where = 'Webmoney';
+    }
 
 
 	$query = Db::query("INSERT INTO `payouts` (`foruser`, `sum`, `req_name`, `req`) VALUES ('".$userData['id']."', '$req', '$where', '$paynumbers')");
