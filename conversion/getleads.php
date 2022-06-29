@@ -8,11 +8,8 @@ ini_set('error_reporting', E_ALL);
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 
-include '/libs/coDb.phpers/Db.php';
-$db = new Db(0,0);
-
-include '../Libs/user.php';
-$_User = new User;
+use Libs\Controllers\Db;
+use Libs\Controllers\User;
 
 if ($_GET['password'] != "26052003arturmeemoney") {
     echo "Error!";
@@ -61,37 +58,37 @@ function calcB($array, $sum, $type){
 }
 
 // Вытаскиваем цену
-$offer = mysqli_fetch_assoc($db->query("SELECT * FROM `offers` WHERE `subid`='".$_GET['offer_id']."'"));
+$offer = mysqli_fetch_assoc(Db::query("SELECT * FROM `offers` WHERE `subid`='".$_GET['offer_id']."'"));
 
 // Перезадаю значение
 #$offer['leadPrice'] = 40 * ($payout_round / 100);
 
 // Вытаскиваем ID рефералов
-$user = mysqli_fetch_assoc($db->query("SELECT * FROM `users` WHERE `id`='".$_GET['aff_sub1']."'")); /* Sam pol'zovatel' */
-$r1 = mysqli_fetch_assoc($db->query("SELECT * FROM `users` WHERE `id`='".$user['referal']."'")); /* 1 lvl Referal */
-$r2 = mysqli_fetch_assoc($db->query("SELECT * FROM `users` WHERE `id`='".$r1['referal']."'")); /* 2 lvl Referal */
+$user = mysqli_fetch_assoc(Db::query("SELECT * FROM `users` WHERE `id`='".$_GET['aff_sub1']."'")); /* Sam pol'zovatel' */
+$r1 = mysqli_fetch_assoc(Db::query("SELECT * FROM `users` WHERE `id`='".$user['referal']."'")); /* 1 lvl Referal */
+$r2 = mysqli_fetch_assoc(Db::query("SELECT * FROM `users` WHERE `id`='".$r1['referal']."'")); /* 2 lvl Referal */
 
-$partner = mysqli_fetch_assoc($db->query("SELECT * FROM `users` WHERE `id`='1'"));
+$partner = mysqli_fetch_assoc(Db::query("SELECT * FROM `users` WHERE `id`='1'"));
 
 // Проверяем, есть ли реферал второго уровня
 // if(empty($r2)) $r1pay = 10;
 
 if($_GET['type_event'] == 'new'){
     // Для начала создаём саму конверсию
-    $db->query("INSERT INTO `conversions` (`transaction_id`, `convpart`, `offer_id`, `webmaster_id`, `price`, `agree`, `spam`, `ip`, `conversion_id`, `status`, `pa`, `payout`, `payout_type`) VALUES ('$transaction_id', 'leads', '".$offer['id']."', '".$user['id']."', '".$offer['leadPrice']."', '0', '0', '$ip', '$conversion_id', '$status', '$pa', '$payout_round', '$payout_type')");
+    Db::query("INSERT INTO `conversions` (`transaction_id`, `convpart`, `offer_id`, `webmaster_id`, `price`, `agree`, `spam`, `ip`, `conversion_id`, `status`, `pa`, `payout`, `payout_type`) VALUES ('$transaction_id', 'leads', '".$offer['id']."', '".$user['id']."', '".$offer['leadPrice']."', '0', '0', '$ip', '$conversion_id', '$status', '$pa', '$payout_round', '$payout_type')");
 
     // Начисление будет проходить по порядку 3-2-1
-    $_User->updateBalance($user['id'], $user['balance'], calcB($user['hold'], $offer['leadPrice'], 'pay'));
+    User::updateBalance($user['id'], $user['balance'], calcB($user['hold'], $offer['leadPrice'], 'pay'));
 
-    if(!empty($r1)) $_User->updateRefbalance($r1['id'], $r1['balance'], calcP($r1['referal_hold'], 20, $offer['leadPrice'], 'pay'));
+    if(!empty($r1)) User::updateRefbalance($r1['id'], $r1['balance'], calcP($r1['referal_hold'], 20, $offer['leadPrice'], 'pay'));
 
-    if(!empty($r2)) $_User->updateRefbalance($r2['id'], $r2['balance'], calcP($r2['referal_hold'], 10, $offer['leadPrice'], 'pay'));
+    if(!empty($r2)) User::updateRefbalance($r2['id'], $r2['balance'], calcP($r2['referal_hold'], 10, $offer['leadPrice'], 'pay'));
     
     // Отправка письма
-    $db->sendMail($user['email'], "У Вас новая конверсия!", "Конверсия по офферу: ".$offer['name'].'<br> На сумму: '.$offer['leadPrice'].'<br> <a href="https://lk.meemoney.ru">В личный кабинет</a>');
+    Db::sendMail($user['email'], "У Вас новая конверсия!", "Конверсия по офферу: ".$offer['name'].'<br> На сумму: '.$offer['leadPrice'].'<br> <a href="https://lk.meemoney.ru">В личный кабинет</a>');
     
     // Начисление партнёру
-    $db->query("UPDATE `users` SET `referal_hold`='".calcP($partner['referal_hold'], 20, $offer['leadPrice'], 'pay')."' WHERE `id`='".$partner['id']."'");
+    Db::query("UPDATE `users` SET `referal_hold`='".calcP($partner['referal_hold'], 20, $offer['leadPrice'], 'pay')."' WHERE `id`='".$partner['id']."'");
 }elseif($_GET['type_event'] == 'status'){
 // Status check begin
 
@@ -99,40 +96,40 @@ if($_GET['type_event'] == 'status')
 
     if($_GET['status'] == 'approved'){
         // Accepted
-        $db->query("UPDATE `conversions` SET `status`='approved' WHERE `transaction_id`='$transaction_id'");
+        Db::query("UPDATE `conversions` SET `status`='approved' WHERE `transaction_id`='$transaction_id'");
 
         // Начисление будет проходить по порядку 3-2-1
-        $_User->updateBalance($user['id'], calcB($user['balance'], 0, 'pay'), calcB($user['hold'], $offer['leadPrice'], 'rej'));
+        User::updateBalance($user['id'], calcB($user['balance'], 0, 'pay'), calcB($user['hold'], $offer['leadPrice'], 'rej'));
 
 
-        if(!empty($r1)) $_User->updateRefbalance($r1['id'], calcP($r1['referal_balance'], 20, 0, 'pay'), calcP($r1['referal_hold'], 20, $offer['leadPrice'], 'rej'));
+        if(!empty($r1)) User::updateRefbalance($r1['id'], calcP($r1['referal_balance'], 20, 0, 'pay'), calcP($r1['referal_hold'], 20, $offer['leadPrice'], 'rej'));
 
-        if(!empty($r2)) $_User->updateRefbalance($r2['id'], calcP($r2['referal_balance'], 10, 0, 'pay'), calcP($r2['referal_hold'], 10, $offer['leadPrice'], 'rej'));  
+        if(!empty($r2)) User::updateRefbalance($r2['id'], calcP($r2['referal_balance'], 10, 0, 'pay'), calcP($r2['referal_hold'], 10, $offer['leadPrice'], 'rej'));
 
-        # Example: if(!empty($r2)) $_User->updateRefbalance($r2['id'], calcP($r2['referal_balance'], 10, $offer['leadPrice'], 'pay'), calcP($r2['referal_hold'], 10, $offer['leadPrice'], 'rej'));  
+        # Example: if(!empty($r2)) User::updateRefbalance($r2['id'], calcP($r2['referal_balance'], 10, $offer['leadPrice'], 'pay'), calcP($r2['referal_hold'], 10, $offer['leadPrice'], 'rej'));
         
         $meebalance = $user['meecoins'] + ($offer['leadPrice'] * 2);
         $meecount = $user['meecount'] + ($offer['leadPrice'] * 2);
         
-        $db->query("UPDATE `users` SET `meecoins`='$meebalance', `meecount`='$meecount' WHERE `id`='".$user['id']."'");
+        Db::query("UPDATE `users` SET `meecoins`='$meebalance', `meecount`='$meecount' WHERE `id`='".$user['id']."'");
         
         // Отправка письма
-        $db->sendMail($user['email'], "Конверсия вышла из холда!", "Конверсия по офферу: ".$offer['name'].'<br> На сумму: '.$offer['leadPrice'].'<br> Ваш баланс: '.$user['balance'].' <br> Ваш холд: '.$user['hold'].' <br><br> Ожидайте оплаты действия! <br> <a href="https://lk.meemoney.ru">В личный кабинет</a>');
+        Db::sendMail($user['email'], "Конверсия вышла из холда!", "Конверсия по офферу: ".$offer['name'].'<br> На сумму: '.$offer['leadPrice'].'<br> Ваш баланс: '.$user['balance'].' <br> Ваш холд: '.$user['hold'].' <br><br> Ожидайте оплаты действия! <br> <a href="https://lk.meemoney.ru">В личный кабинет</a>');
 
         // Начисление партнёру
-            $_User->updateRefbalance($partner['id'], calcP($partner['referal_balance'], 20, $offer['leadPrice'], 'pay'), calcP($partner['referal_hold'], 20, $offer['leadPrice'], 'rej'));
+            User::updateRefbalance($partner['id'], calcP($partner['referal_balance'], 20, $offer['leadPrice'], 'pay'), calcP($partner['referal_hold'], 20, $offer['leadPrice'], 'rej'));
     }elseif($_GET['status'] == 'rejected'){
         // Declined
-        $db->query("UPDATE `conversions` SET `status`='rejected' WHERE `transaction_id`='$transaction_id'");
+        Db::query("UPDATE `conversions` SET `status`='rejected' WHERE `transaction_id`='$transaction_id'");
 
         // Начисление будет проходить по порядку 3-2-1
-        $_User->updateBalance($user['id'], $user['balance'], calcB($user['hold'], $offer['leadPrice'], 'rej'));
+        User::updateBalance($user['id'], $user['balance'], calcB($user['hold'], $offer['leadPrice'], 'rej'));
 
-        if(!empty($r1)) $_User->updateRefbalance($r1['id'], $r1['balance'], calcP($r1['referal_hold'], 20, $offer['leadPrice'], 'rej'));
-        if(!empty($r2)) $_User->updateRefbalance($r2['id'], $r2['balance'], calcP($r2['referal_hold'], 10, $offer['leadPrice'], 'rej'));
+        if(!empty($r1)) User::updateRefbalance($r1['id'], $r1['balance'], calcP($r1['referal_hold'], 20, $offer['leadPrice'], 'rej'));
+        if(!empty($r2)) User::updateRefbalance($r2['id'], $r2['balance'], calcP($r2['referal_hold'], 10, $offer['leadPrice'], 'rej'));
 
         // Начисление партнёру
-        $db->query("UPDATE `users` SET `referal_hold`='".calcP($partner['referal_hold'], 20, $offer['leadPrice'], 'rej')."' WHERE `id`='".$partner['id']."'");          
+        Db::query("UPDATE `users` SET `referal_hold`='".calcP($partner['referal_hold'], 20, $offer['leadPrice'], 'rej')."' WHERE `id`='".$partner['id']."'");
     }
 
 // Status check end
