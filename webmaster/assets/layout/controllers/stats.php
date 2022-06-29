@@ -1,5 +1,7 @@
 <?php
 
+use Libs\Controllers\Admitad;
+
 $userId = \Libs\Controllers\Db::userSelect()['id'];
 $conversions = \Libs\Controllers\Db::query("SELECT * FROM `conversions` WHERE `webmaster_id`='$userId' ORDER BY `id` DESC");
 $conversionsRejected = \Libs\Controllers\Db::query("SELECT * FROM `conversions` WHERE `webmaster_id`='$userId' AND `status`='rejected' ORDER BY `id` DESC");
@@ -16,3 +18,8 @@ while ($referral = mysqli_fetch_assoc($referrals)) {
 $pageName = "Статистика и конверсии";
 
 $leadsStat = \Libs\Controllers\Leads::init();
+
+$clicks = Admitad::getClicks($userId);
+$clicks = $clicks['results'][0]['clicks'];
+
+$leadsStat['clicks'] += $clicks;

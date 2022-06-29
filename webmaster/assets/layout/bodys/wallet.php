@@ -154,7 +154,7 @@
                                         <?if(mysqli_num_rows($hItems) < 1):?>
                                             <tr>
                                                 <td colspan="5">Запросов пока не было :(</td>
-                                            </tr>
+                                            </tr>ё
                                         <?endif;?>
                                     </tbody>
                                 </table>
