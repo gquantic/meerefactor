@@ -73,6 +73,9 @@
                         <div class="body">                            
                             <div class="tab-content">
                                 <div class="tab-pane active" id="description">
+                                    <div class="alert alert-danger" style="background: #c70000;font-size:17px;padding:5px 15px;">
+                                        Внимание! Не сокращайте ссылку! Система не сможет определить Ваш ID!
+                                    </div>
                                     <?if($offer['needcheck'] == 0):?>
                                     <div class="form-group">
                                         <label for="">Ссылка для привлечения:</label>
