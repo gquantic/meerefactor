@@ -12,6 +12,23 @@ $notifs = \Libs\Controllers\Db::query("SELECT * FROM `notifications` WHERE `foru
     <meta name="description" content="Партнёрская программа MeeMoney">
     <meta name="author" content="Ssapphire inc.">
     <title><?php if(isset($pageName) && $pageName !== ''): echo $pageName." | MeeMoney"; else: ?>Партнёрская программа MeeMoney<?php endif; ?></title>
+
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+            m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+        ym(65045485, "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true,
+            webvisor:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/65045485" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+
     <link rel="stylesheet" href="/assets/template/plugins/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="/assets/template/plugins/jvectormap/jquery-jvectormap-2.0.3.min.css"/>
     <link rel="stylesheet" href="/assets/template/plugins/charts-c3/plugin.css"/>
