@@ -4,6 +4,8 @@
 lk.meemoney.ru/conversion/getleads.php?conversion_id={conversion_id}&created={created}&status={status}&pa={pa}&payout={payout}&payout_round={payout_round}&payout_type={payout_type}&referrer={referrer}&user_agent={user_agent}&offer_id={offer_id}&offer_name={offer_name}&affiliate_id={affiliate_id}&source={source}&aff_sub1={aff_sub1}&offer_url_id={offer_url_id}&browser_app={browser_app}&browser_device={browser_device}&country_name={country_name}&region_name={region_name}&city_name={city_name}&transaction_id={transaction_id}&ip={ip}&adv_sub={adv_sub}&type_event=new
 */
 
+require_once $_SERVER['DOCUMENT_ROOT'] . '/vendor/autoload.php';
+
 ini_set('error_reporting', E_ALL);
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
