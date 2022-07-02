@@ -59,6 +59,8 @@ class Site
      */
     public static function startSession()
     {
+        session_save_path("/tmp");
+        
         if (!isset($_SESSION)) {
             session_start();
         }
@@ -71,7 +73,7 @@ class Site
      */
     public static function closeSession()
     {
-        if ($_SESSION) {
+        if (isset($_SESSION)) {
             session_destroy();
         }
     }

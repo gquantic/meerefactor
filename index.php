@@ -4,5 +4,5 @@
 	*** C:/Работа/site/OSPanel/domains/site/
 	*/
 
-	header("Location: login.php");
+	header("Location: /login.php");
 	?>

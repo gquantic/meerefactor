@@ -119,7 +119,7 @@ if($_GET['type_event'] == 'status')
         Db::sendMail($user['email'], "Конверсия вышла из холда!", "Конверсия по офферу: ".$offer['name'].'<br> На сумму: '.$offer['leadPrice'].'<br> Ваш баланс: '.$user['balance'].' <br> Ваш холд: '.$user['hold'].' <br><br> Ожидайте оплаты действия! <br> <a href="https://lk.meemoney.ru">В личный кабинет</a>');
 
         // Начисление партнёру
-            User::updateRefbalance($partner['id'], calcP($partner['referal_balance'], 20, $offer['leadPrice'], 'pay'), calcP($partner['referal_hold'], 20, $offer['leadPrice'], 'rej'));
+        User::updateRefbalance($partner['id'], calcP($partner['referal_balance'], 20, $offer['leadPrice'], 'pay'), calcP($partner['referal_hold'], 20, $offer['leadPrice'], 'rej'));
     }elseif($_GET['status'] == 'rejected'){
         // Declined
         Db::query("UPDATE `conversions` SET `status`='rejected' WHERE `transaction_id`='$transaction_id'");

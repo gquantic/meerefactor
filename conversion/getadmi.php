@@ -6,9 +6,9 @@ lk.meemoney.ru/conversion/getleads.php?conversion_id={conversion_id}&created={cr
 
 require_once $_SERVER['DOCUMENT_ROOT'] . '/vendor/autoload.php';
 
-ini_set('error_reporting', E_ALL);
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
+//ini_set('error_reporting', E_ALL);
+//ini_set('display_errors', 1);
+//ini_set('display_startup_errors', 1);
 
 use Libs\Controllers\Db;
 use Libs\Controllers\User;
