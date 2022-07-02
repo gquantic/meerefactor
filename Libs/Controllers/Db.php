@@ -121,22 +121,22 @@ class Db
     }
 
     /* Выбор из БД записей в опред. период времени */
-    function exportWithDate($from, $dc, $d,$m,$y)
+    public static function exportWithDate($from, $dc, $d,$m,$y)
     {
-        return $this->query("SELECT * FROM `$from` WHERE `$dc` LIKE '$y-$m-$d'");
+        return self::query("SELECT * FROM `$from` WHERE `$dc` LIKE '$y-$m-$d'");
     }
 
     /**
      * Выбор из БД записей в определенный день недели
      *
      * @param $from - из
-     * @param $dc - дата
+     * @param $dc - колонка
      * @param $day - сколько дней назад
      * @return bool mysqli_result
      */
-    function exportInPeriod($from, $dc, $day)
+    public static function exportInPeriod($from, $dc, $day)
     {
-        return $this->query("SELECT * FROM `$from` WHERE `$dc` LIKE '".date('Y-m-d', time() - (86400 * $day))." %%:%%:%%'");
+        return self::query("SELECT * FROM `$from` WHERE `$dc` LIKE '".date('Y-m-d', time() - (86400 * $day))." %%:%%:%%'");
     }
 
     /**

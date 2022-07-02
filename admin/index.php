@@ -1,36 +1,51 @@
-<?
-	/*
-	*** Главный файл, отвечающий за корень сайта веб-мастера
-	*/
+<?php
+ini_set('error_reporting', E_ALL);
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
 
-	//Подключение всех библиотек 
+require_once $_SERVER['DOCUMENT_ROOT'] . '/vendor/autoload.php';
+
+//Подключение всех библиотек
 use Libs\Controllers\Site;
+use Libs\Controllers\Db;
 
-require_once "/libs/coDb.phpers/Db.php";
-	$_Db = new Db(1, 1);
+session_start();
 
-	//Подключаем графики 
-	require_once "charts/conv_charts.php";
-	$_Db = new Db(1, 1);
+$userData = Db::userSelect();
 
-	session_start();
+if($_SESSION['type'] != 'admin') header("Location: /webmaster/");
 
-	$userData = $_Db->userSelect();
+// Получаем данные о запрашиваемой странице
+$name = Site::pageName();
 
-	if($_SESSION['type'] != 'admin') header("Location: /webmaster/");
+$uri = substr($_SERVER['REQUEST_URI'], 7);
+$getVariables = strpos($uri, '?');
 
-	require_once "../Libs/site.php";
-	$_Site = new Site();
+$userData = Db::userSelect();
 
-	// Получаем данные о запрашиваемой странице
-	$name = $_Site->pageName();
-    
-    // Подключение шапки
-	include "assets/layout/blocks/header.php";
+if ($getVariables !== false) {
+    $uri = substr($uri, 0, $getVariables);
+}
 
-	// Прорисовка сайта
-	include "assets/layout/bodys/index.php";
+$uri == '' ? $uri = 'index' : $uri;
 
-    // Подключение подвала
-	include "assets/layout/blocks/footer.php";
-?>
+$phpDotExtension = strpos($uri, '.php');
+
+if ($phpDotExtension !== false) {
+    $end = $phpDotExtension + 4;
+    $uri = substr($uri, 0, $phpDotExtension);
+}
+
+// Если есть обработчик, то подключаем
+if (file_exists("assets/layout/controllers/{$uri}.php")) {
+    include "assets/layout/controllers/{$uri}.php";
+}
+
+// Подключение шапки
+include "assets/layout/blocks/header.php";
+
+// Прорисовка сайта
+include "assets/layout/bodys/{$uri}.php";
+
+// Подключение подвала
+include "assets/layout/blocks/footer.php";
