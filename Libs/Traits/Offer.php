@@ -18,7 +18,7 @@ trait Offer {
     public static function executeOffer($offer)
     {
         ?>
-            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6">
+            <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
                 <div class="card">
                     <div class="body product_item" style="/*min-height: 326px;*/">
                         <?php if($offer['action'] != ''): ?><span class="label new" style="background: #f15353;"><?php echo $offer['action']; ?></span><?php endif; ?>
