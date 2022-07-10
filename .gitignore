@@ -5,3 +5,4 @@ promo/js/
 **/blocks/assets/
 /vendor/
 /Libs/Traits/*
+Libs/Traits/Db.php
