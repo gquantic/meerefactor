@@ -8,43 +8,44 @@
     <link rel="shortcut icon" type="image/x-icon" href="/favicon.png">
     <meta name="description" content="Авторизация | MeeMoney">
     <meta name="author" content="Ssapphire inc.">
-    <link rel="stylesheet" href="assets/layout/blocks/assets/plugins/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/layout/blocks/assets/plugins/jvectormap/jquery-jvectormap-2.0.3.min.css"/>
-    <link rel="stylesheet" href="assets/layout/blocks/assets/plugins/charts-c3/plugin.css"/>
+    <link rel="stylesheet" href="/assets/template/plugins/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/assets/template/plugins/jvectormap/jquery-jvectormap-2.0.3.min.css"/>
+    <link rel="stylesheet" href="/assets/template/plugins/charts-c3/plugin.css"/>
 
-    <link rel="stylesheet" href="assets/layout/blocks/assets/plugins/morrisjs/morris.min.css" />
+    <link rel="stylesheet" href="/assets/template/plugins/morrisjs/morris.min.css" />
 
     <!-- Dropify -->
-    <link rel="stylesheet" href="assets/layout/blocks/assets/plugins/dropify/css/dropify.min.css">
+    <link rel="stylesheet" href="/assets/template/plugins/dropify/css/dropify.min.css">
 
     <!-- Custom Css -->
-    <link rel="stylesheet" href="assets/layout/blocks/assets/css/style.min.css">
+    <link rel="stylesheet" href="/assets/template/css/style.min.css">
 
     <!-- Jquery -->
     <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
 
     <!-- Interactive JS -->
-    <script type="text/javascript" src="libs/ui.js"></script>
+    <script type="text/javascript" src="/admin/libs/ui.js"></script>
     <script type="text/javascript" src="/handlers/exdate.js"></script>
 
     <!-- Icons and fonts -->
     <script src="https://kit.fontawesome.com/ada758ae4a.js" crossorigin="anonymous"></script>
 
     <!-- JQuery DataTable Css -->
-    <link rel="stylesheet" href="assets/layout/blocks/assets/plugins/jquery-datatable/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="/assets/template/plugins/jquery-datatable/dataTables.bootstrap4.min.css">
 
     <!-- Bootstrap Select Css -->
-    <link rel="stylesheet" href="assets/layout/blocks/assets/plugins/bootstrap-select/css/bootstrap-select.css" />
+    <link rel="stylesheet" href="/assets/template/plugins/bootstrap-select/css/bootstrap-select.css" />
 
     <!-- Multi Select Css -->
-    <link rel="stylesheet" href="assets/layout/blocks/assets/plugins/multi-select/css/multi-select.css">
+    <link rel="stylesheet" href="/assets/template/plugins/multi-select/css/multi-select.css">
     <!-- Select2 -->
-    <link rel="stylesheet" href="assets/layout/blocks/assets/plugins/select2/select2.css" />
+    <link rel="stylesheet" href="/assets/template/plugins/select2/select2.css" />
 
     <!-- Bootstrap Select Css -->
-    <link rel="stylesheet" href="assets/layout/blocks/assets/plugins/bootstrap-select/css/bootstrap-select.css" />
+    <link rel="stylesheet" href="/assets/template/plugins/bootstrap-select/css/bootstrap-select.css" />
 
-    <link rel="stylesheet" href="/admin/assets/layout/blocks/assets/plugins/summernote/dist/summernote.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.20/summernote.min.css"
+          integrity="sha512-m52YCZLrqQpQ+k+84rmWjrrkXAUrpl3HK0IO4/naRwp58pyr7rf5PO1DbI2/aFYwyeIH/8teS9HbLxVyGqDv/A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
 <body class="theme-blush">

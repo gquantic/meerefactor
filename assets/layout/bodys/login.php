@@ -14,9 +14,7 @@ if(isset($_POST['auth'])){
 
         if (mysqli_num_rows($user) > 0) {
             $user = mysqli_fetch_assoc($user);
-
-
-
+            
             if(md5($password) == $user['password']){
                 Site::startSession();
 

@@ -299,7 +299,7 @@ $notifs = \Libs\Controllers\Db::query("SELECT * FROM `notifications` WHERE `foru
         <!--li><a href="javascript:void(0);" class="app_google_drive" title="Google Drive"><i class="zmdi zmdi-google-drive"></i></a></li-->
         <!--li><a href="javascript:void(0);" class="app_group_work" title="Group Work"><i class="zmdi zmdi-group-work"></i></a></li-->
         <li><a href="javascript:void(0);" class="js-right-sidebar" title="Setting"><i class="zmdi zmdi-settings zmdi-hc-spin"></i></a></li>
-        <li><a href="/exit" class="mega-menu" title="Sign Out"><i class="zmdi zmdi-power"></i></a></li>
+        <li><a href="/exit.php" class="mega-menu" title="Sign Out"><i class="zmdi zmdi-power"></i></a></li>
     </ul>
 </div>
 
@@ -338,7 +338,7 @@ $notifs = \Libs\Controllers\Db::query("SELECT * FROM `notifications` WHERE `foru
 
             <li><a href="faq"><i class="zmdi zmdi-book"></i><span>Полезная информация</span></a></li>
             
-            <li><a href="/exit"><i class="zmdi zmdi-minus-circle"></i><span>Выход</span></a></li><br>
+            <li><a href="/exit.php"><i class="zmdi zmdi-minus-circle"></i><span>Выход</span></a></li><br>
         </ul>
     </div>
 </aside>

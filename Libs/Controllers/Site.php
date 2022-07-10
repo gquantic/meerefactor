@@ -59,8 +59,6 @@ class Site
      */
     public static function startSession()
     {
-        session_save_path("/tmp");
-        
         if (!isset($_SESSION)) {
             session_start();
         }

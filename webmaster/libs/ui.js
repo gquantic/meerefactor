@@ -126,6 +126,8 @@ function editPayments(){
 			},
 
 			function(data){
+				console.log(data);
+
 				if(data == 'error__oldpass'){
 					swal("Ошибка!", "Неверно введён пароль.", "error");
 				}else if(data == 'error__except'){
