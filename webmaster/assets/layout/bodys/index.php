@@ -71,14 +71,6 @@
             </div></a>
         </div
 
-        <div class="row">
-            <div class="col-12">
-                <div class="alert alert-danger" style="background: #c70000;font-size:17px;padding:5px 15px;">
-                    Внимание! Не сокращайте ссылку! Система не сможет определить Ваш ID!
-                </div>
-            </div>
-        </div>
-
         <?php if(mysqli_num_rows($debcard) > 0): ?>
         <div class="row clearfix">
             <div class="col-lg-12">

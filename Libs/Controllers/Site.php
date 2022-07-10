@@ -71,7 +71,7 @@ class Site
      */
     public static function closeSession()
     {
-        if ($_SESSION) {
+        if (isset($_SESSION)) {
             session_destroy();
         }
     }

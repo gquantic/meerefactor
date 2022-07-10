@@ -12,9 +12,11 @@ use Libs\Controllers\Site;
 Site::startSession();
 Db::authCheck();
 
-ini_set('error_reporting', E_ALL);
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
+require_once $_SERVER['DOCUMENT_ROOT'] . '/vendor/autoload.php';
+
+//ini_set('error_reporting', E_ALL);
+//ini_set('display_errors', 1);
+//ini_set('display_startup_errors', 1);
 
 $uri = substr($_SERVER['REQUEST_URI'], 11);
 $getVariables = strpos($uri, '?');

@@ -16,6 +16,8 @@ class Db
      */
     public function __construct($userLogin, $requireAuth = false)
     {
+        session_save_path("/tmp");
+        
         if (!isset($_SESSION)) {
             session_start();
         }

@@ -183,6 +183,7 @@
                                                 <?while($conversion = mysqli_fetch_assoc($conversions)):
                                                   $meeOffer = mysqli_fetch_assoc(\Libs\Controllers\Db::query("SELECT * FROM `offers` WHERE `id`='".$conversion['offer_id']."'"));
                                                 ?>
+                                                    <?php if (isset($_GET['debug'])) echo $conversion['status'] . " | "; ?>
                                                 <tr>
                                                     <td><a <?if($meeOffer['name'] != ''){?>href="viewoffer?id=<?echo $conversion['offer_id'];?>"<?}?>>
                                                         <?if($meeOffer['name'] != ''){?>
@@ -195,7 +196,13 @@
                                                     <td><?echo $conversion['price']?>₽</td>
                                                     <td><?if($conversion['status'] == 'pending' || $conversion['status'] == 'new'):?><span style="color:#ff6100;">Ожидание</span><?elseif($conversion['status'] == 'rejected'):?>
                                                     <span style="color:red;">Отклонен</span>
-                                                    <?else:?><span style="color:green;">Принят</span><?endif;?></td>
+                                                        <?php elseif($conversion['status'] == 'waiting_payment'): ?>
+                                                            <span style="color:orange;">Ожидание оплаты</span>
+                                                        <?php elseif($conversion['status'] == 'approved'): ?>
+                                                            <span style="color:green;">Принят</span>
+                                                        <?else:?>
+                                                            <span style="color:orange;">Обратитесь в службу поддержки</span>
+                                                        <?endif;?></td>
                                                 </tr>
                                                 <?endwhile;?>
                                             </tbody>
